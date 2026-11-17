@@ -1,0 +1,1740 @@
+{
+  "id": "db08171b-273f-460b-b7c5-1b84494c5110",
+  "revision": 0,
+  "last_node_id": 38,
+  "last_link_id": 37,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "title": "FLUX.2 Klein 4B FP8",
+      "pos": [
+        490,
+        65
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux-2-klein-4b-fp8.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "title": "Qwen3 4B FP4 encoder",
+      "pos": [
+        490,
+        225
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen_3_4b_fp4_flux2.safetensors",
+        "flux2",
+        "default"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "title": "FLUX.2 VAE",
+      "pos": [
+        490,
+        385
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "flux2-vae.safetensors"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "title": "Prompt",
+      "pos": [
+        980,
+        530
+      ],
+      "size": [
+        345,
+        175
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 1,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 5,
+      "type": "PrimitiveInt",
+      "title": "6 · Ширина (кратно 32)",
+      "pos": [
+        0,
+        875
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            3,
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        1024,
+        "fixed"
+      ],
+      "color": "#233a32",
+      "bgcolor": "#305448"
+    },
+    {
+      "id": 6,
+      "type": "PrimitiveInt",
+      "title": "7 · Высота (кратно 32)",
+      "pos": [
+        0,
+        1035
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            4,
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        640,
+        "fixed"
+      ],
+      "color": "#233a32",
+      "bgcolor": "#305448"
+    },
+    {
+      "id": 7,
+      "type": "EmptyFlux2LatentImage",
+      "title": "Canvas and batch count",
+      "pos": [
+        1470,
+        65
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 3,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 4,
+          "widget": {
+            "name": "height"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyFlux2LatentImage"
+      },
+      "widgets_values": [
+        1024,
+        640,
+        1
+      ]
+    },
+    {
+      "id": 8,
+      "type": "Flux2Scheduler",
+      "title": "Steps (distilled default: 4)",
+      "pos": [
+        1470,
+        225
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 5,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 6,
+          "widget": {
+            "name": "height"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Flux2Scheduler"
+      },
+      "widgets_values": [
+        4,
+        1024,
+        640
+      ]
+    },
+    {
+      "id": 9,
+      "type": "RandomNoise",
+      "title": "8 · Seed",
+      "pos": [
+        0,
+        1195
+      ],
+      "size": [
+        305,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        451721,
+        "fixed"
+      ],
+      "color": "#233a32",
+      "bgcolor": "#305448"
+    },
+    {
+      "id": 10,
+      "type": "KSamplerSelect",
+      "title": "Sampler",
+      "pos": [
+        1470,
+        385
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "BasicGuider",
+      "title": "Distilled guidance (CFG 1)",
+      "pos": [
+        1470,
+        545
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 7
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "SamplerCustomAdvanced",
+      "title": "Generate",
+      "pos": [
+        1470,
+        705
+      ],
+      "size": [
+        305,
+        150
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 9
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 10
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 11
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 12
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            14
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 13,
+      "type": "VAEDecode",
+      "title": "Decode",
+      "pos": [
+        1470,
+        880
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 14
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            31,
+            33,
+            36
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 14,
+      "type": "PreviewImage",
+      "title": "Preview",
+      "pos": [
+        1960,
+        65
+      ],
+      "size": [
+        440,
+        345
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "COMFY_MATCHTYPE_V3",
+          "link": 16
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 15,
+      "type": "SaveImage",
+      "title": "9 · Сохранить PNG",
+      "pos": [
+        1960,
+        435
+      ],
+      "size": [
+        440,
+        345
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "COMFY_MATCHTYPE_V3",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "JigaSwagPuzzle/GameArt_Final/Text_to_Asset/Asset"
+      ]
+    },
+    {
+      "id": 20,
+      "type": "PrimitiveStringMultiline",
+      "title": "1 · Что создать",
+      "pos": [
+        0,
+        65
+      ],
+      "size": [
+        345,
+        140
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            24
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "A single wide horizontal mobile game menu button. A deep emerald-green uninterrupted face, thin warm ivory rim and muted gold border. Long rounded rectangle about four times wider than tall. Front view, centered with generous margin. No text, icon or ornaments."
+      ],
+      "color": "#233a32",
+      "bgcolor": "#305448"
+    },
+    {
+      "id": 21,
+      "type": "PrimitiveStringMultiline",
+      "title": "2 · Стиль",
+      "pos": [
+        0,
+        230
+      ],
+      "size": [
+        345,
+        140
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Premium illustrated casual puzzle-adventure UI. Clean silhouette, soft painted gradients, a shallow bevel and restrained color. Isolated on a flat neutral background."
+      ],
+      "color": "#233a32",
+      "bgcolor": "#305448"
+    },
+    {
+      "id": 22,
+      "type": "PrimitiveBoolean",
+      "title": "3 · Убрать фон → PNG с альфой",
+      "pos": [
+        0,
+        395
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "links": [
+            35
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveBoolean"
+      },
+      "widgets_values": [
+        true
+      ],
+      "color": "#233a32",
+      "bgcolor": "#305448"
+    },
+    {
+      "id": 23,
+      "type": "PrimitiveBoolean",
+      "title": "4 · Добавить тень",
+      "pos": [
+        0,
+        555
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveBoolean"
+      },
+      "widgets_values": [
+        false
+      ],
+      "color": "#233a32",
+      "bgcolor": "#305448"
+    },
+    {
+      "id": 24,
+      "type": "PrimitiveBoolean",
+      "title": "5 · Добавить блики",
+      "pos": [
+        0,
+        715
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveBoolean"
+      },
+      "widgets_values": [
+        true
+      ],
+      "color": "#233a32",
+      "bgcolor": "#305448"
+    },
+    {
+      "id": 25,
+      "type": "PrimitiveStringMultiline",
+      "title": "Инструкция для промпта",
+      "pos": [
+        490,
+        545
+      ],
+      "size": [
+        345,
+        140
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "No cast shadow. No contact shadow. Use even diffuse shading."
+      ]
+    },
+    {
+      "id": 26,
+      "type": "PrimitiveStringMultiline",
+      "title": "Инструкция для промпта",
+      "pos": [
+        490,
+        710
+      ],
+      "size": [
+        345,
+        140
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Add a small soft contact shadow directly beneath the object, no dramatic lighting."
+      ]
+    },
+    {
+      "id": 27,
+      "type": "PrimitiveStringMultiline",
+      "title": "Инструкция для промпта",
+      "pos": [
+        490,
+        875
+      ],
+      "size": [
+        345,
+        140
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            22
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Matte surface. No specular highlight or gleam."
+      ]
+    },
+    {
+      "id": 28,
+      "type": "PrimitiveStringMultiline",
+      "title": "Инструкция для промпта",
+      "pos": [
+        490,
+        1040
+      ],
+      "size": [
+        345,
+        140
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Add a restrained thin edge highlight and a small controlled specular gleam."
+      ]
+    },
+    {
+      "id": 29,
+      "type": "ComfySwitchNode",
+      "title": "Тень: текст",
+      "pos": [
+        490,
+        1205
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "switch",
+          "type": "BOOLEAN",
+          "link": 18,
+          "widget": {
+            "name": "switch"
+          }
+        },
+        {
+          "name": "on_false",
+          "type": "STRING",
+          "link": 19
+        },
+        {
+          "name": "on_true",
+          "type": "STRING",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "COMFY_MATCHTYPE_V3",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ComfySwitchNode"
+      },
+      "widgets_values": [
+        false
+      ]
+    },
+    {
+      "id": 30,
+      "type": "ComfySwitchNode",
+      "title": "Блики: текст",
+      "pos": [
+        490,
+        1365
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "switch",
+          "type": "BOOLEAN",
+          "link": 21,
+          "widget": {
+            "name": "switch"
+          }
+        },
+        {
+          "name": "on_false",
+          "type": "STRING",
+          "link": 22
+        },
+        {
+          "name": "on_true",
+          "type": "STRING",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "COMFY_MATCHTYPE_V3",
+          "links": [
+            27
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ComfySwitchNode"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 31,
+      "type": "StringConcatenate",
+      "title": "Собрать промпт",
+      "pos": [
+        980,
+        65
+      ],
+      "size": [
+        305,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_a",
+          "type": "STRING",
+          "link": 24,
+          "widget": {
+            "name": "string_a"
+          }
+        },
+        {
+          "name": "string_b",
+          "type": "STRING",
+          "link": 25,
+          "widget": {
+            "name": "string_b"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "A single wide horizontal mobile game menu button. A deep emerald-green uninterrupted face, thin warm ivory rim and muted gold border. Long rounded rectangle about four times wider than tall. Front view, centered with generous margin. No text, icon or ornaments.",
+        "Premium illustrated casual puzzle-adventure UI. Clean silhouette, soft painted gradients, a shallow bevel and restrained color. Isolated on a flat neutral background.",
+        "\n"
+      ]
+    },
+    {
+      "id": 32,
+      "type": "StringConcatenate",
+      "title": "Собрать промпт",
+      "pos": [
+        980,
+        220
+      ],
+      "size": [
+        305,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_a",
+          "type": "COMFY_MATCHTYPE_V3",
+          "link": 26,
+          "widget": {
+            "name": "string_a"
+          }
+        },
+        {
+          "name": "string_b",
+          "type": "COMFY_MATCHTYPE_V3",
+          "link": 27,
+          "widget": {
+            "name": "string_b"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            29
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "\n"
+      ]
+    },
+    {
+      "id": 33,
+      "type": "StringConcatenate",
+      "title": "Собрать промпт",
+      "pos": [
+        980,
+        375
+      ],
+      "size": [
+        305,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_a",
+          "type": "STRING",
+          "link": 28,
+          "widget": {
+            "name": "string_a"
+          }
+        },
+        {
+          "name": "string_b",
+          "type": "STRING",
+          "link": 29,
+          "widget": {
+            "name": "string_b"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "\n"
+      ]
+    },
+    {
+      "id": 34,
+      "type": "LoadBackgroundRemovalModel",
+      "title": "BiRefNet",
+      "pos": [
+        1470,
+        1040
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "bg_model",
+          "type": "BACKGROUND_REMOVAL",
+          "links": [
+            30
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadBackgroundRemovalModel"
+      },
+      "widgets_values": [
+        "birefnet.safetensors"
+      ]
+    },
+    {
+      "id": 35,
+      "type": "RemoveBackground",
+      "title": "Выделить предмет",
+      "pos": [
+        1470,
+        1200
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "bg_removal_model",
+          "type": "BACKGROUND_REMOVAL",
+          "link": 30
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            32
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RemoveBackground"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 36,
+      "type": "InvertMask",
+      "title": "Маска прозрачности",
+      "pos": [
+        1470,
+        1360
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 32
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            34
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InvertMask"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 37,
+      "type": "JoinImageWithAlpha",
+      "title": "Добавить альфа-канал",
+      "pos": [
+        1470,
+        1520
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 33
+        },
+        {
+          "name": "alpha",
+          "type": "MASK",
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            37
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "JoinImageWithAlpha"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 38,
+      "type": "ComfySwitchNode",
+      "title": "Выход RGB или RGBA",
+      "pos": [
+        1470,
+        1680
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "switch",
+          "type": "BOOLEAN",
+          "link": 35,
+          "widget": {
+            "name": "switch"
+          }
+        },
+        {
+          "name": "on_false",
+          "type": "IMAGE",
+          "link": 36
+        },
+        {
+          "name": "on_true",
+          "type": "IMAGE",
+          "link": 37
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "COMFY_MATCHTYPE_V3",
+          "links": [
+            16,
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ComfySwitchNode"
+      },
+      "widgets_values": [
+        true
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      33,
+      0,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      2,
+      0,
+      4,
+      1,
+      "CLIP"
+    ],
+    [
+      3,
+      5,
+      0,
+      7,
+      0,
+      "INT"
+    ],
+    [
+      4,
+      6,
+      0,
+      7,
+      1,
+      "INT"
+    ],
+    [
+      5,
+      5,
+      0,
+      8,
+      0,
+      "INT"
+    ],
+    [
+      6,
+      6,
+      0,
+      8,
+      1,
+      "INT"
+    ],
+    [
+      7,
+      1,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      8,
+      4,
+      0,
+      11,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      9,
+      0,
+      12,
+      0,
+      "NOISE"
+    ],
+    [
+      10,
+      11,
+      0,
+      12,
+      1,
+      "GUIDER"
+    ],
+    [
+      11,
+      10,
+      0,
+      12,
+      2,
+      "SAMPLER"
+    ],
+    [
+      12,
+      8,
+      0,
+      12,
+      3,
+      "SIGMAS"
+    ],
+    [
+      13,
+      7,
+      0,
+      12,
+      4,
+      "LATENT"
+    ],
+    [
+      14,
+      12,
+      0,
+      13,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      3,
+      0,
+      13,
+      1,
+      "VAE"
+    ],
+    [
+      16,
+      38,
+      0,
+      14,
+      0,
+      "COMFY_MATCHTYPE_V3"
+    ],
+    [
+      17,
+      38,
+      0,
+      15,
+      0,
+      "COMFY_MATCHTYPE_V3"
+    ],
+    [
+      18,
+      23,
+      0,
+      29,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      19,
+      25,
+      0,
+      29,
+      1,
+      "STRING"
+    ],
+    [
+      20,
+      26,
+      0,
+      29,
+      2,
+      "STRING"
+    ],
+    [
+      21,
+      24,
+      0,
+      30,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      22,
+      27,
+      0,
+      30,
+      1,
+      "STRING"
+    ],
+    [
+      23,
+      28,
+      0,
+      30,
+      2,
+      "STRING"
+    ],
+    [
+      24,
+      20,
+      0,
+      31,
+      0,
+      "STRING"
+    ],
+    [
+      25,
+      21,
+      0,
+      31,
+      1,
+      "STRING"
+    ],
+    [
+      26,
+      29,
+      0,
+      32,
+      0,
+      "COMFY_MATCHTYPE_V3"
+    ],
+    [
+      27,
+      30,
+      0,
+      32,
+      1,
+      "COMFY_MATCHTYPE_V3"
+    ],
+    [
+      28,
+      31,
+      0,
+      33,
+      0,
+      "STRING"
+    ],
+    [
+      29,
+      32,
+      0,
+      33,
+      1,
+      "STRING"
+    ],
+    [
+      30,
+      34,
+      0,
+      35,
+      0,
+      "BACKGROUND_REMOVAL"
+    ],
+    [
+      31,
+      13,
+      0,
+      35,
+      1,
+      "IMAGE"
+    ],
+    [
+      32,
+      35,
+      0,
+      36,
+      0,
+      "MASK"
+    ],
+    [
+      33,
+      13,
+      0,
+      37,
+      0,
+      "IMAGE"
+    ],
+    [
+      34,
+      36,
+      0,
+      37,
+      1,
+      "MASK"
+    ],
+    [
+      35,
+      22,
+      0,
+      38,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      36,
+      13,
+      0,
+      38,
+      1,
+      "IMAGE"
+    ],
+    [
+      37,
+      37,
+      0,
+      38,
+      2,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Настройки",
+      "bounding": [
+        -14,
+        20,
+        466,
+        1306
+      ],
+      "color": "#287b67",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "Подготовка",
+      "bounding": [
+        476,
+        20,
+        466,
+        1501
+      ],
+      "color": "#425d76",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Условия модели",
+      "bounding": [
+        966,
+        20,
+        466,
+        706
+      ],
+      "color": "#425d76",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "Генерация и обработка",
+      "bounding": [
+        1456,
+        20,
+        466,
+        1816
+      ],
+      "color": "#425d76",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "Готовый PNG",
+      "bounding": [
+        1946,
+        20,
+        466,
+        781
+      ],
+      "color": "#425d76",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.72,
+      "offset": [
+        38,
+        44
+      ]
+    }
+  },
+  "version": 0.4
+}

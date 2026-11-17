@@ -1,0 +1,218 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "sd15_base.safetensors"
+    },
+    "_meta": {
+      "title": "Model: SD 1.5 (replace with compatible checkpoint)"
+    }
+  },
+  "2": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "game UI button, centered golden star emblem, polished blue rounded square, clean silhouette, front view, soft studio lighting, plain white background, high quality illustration",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Positive prompt"
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "blurry, photograph, watermark, text, letters, clutter, cropped, low quality",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Negative prompt"
+    }
+  },
+  "4": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "reference.png"
+    },
+    "_meta": {
+      "title": "Reference image / edit mask"
+    }
+  },
+  "5": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "4",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "center"
+    },
+    "_meta": {
+      "title": "Prepare reference: 512 x 512"
+    }
+  },
+  "6": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "5",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Encode reference"
+    }
+  },
+  "7": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "2",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ],
+      "seed": 20261007,
+      "steps": 20,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.35
+    },
+    "_meta": {
+      "title": "Generation: denoise controls reference preservation"
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "7",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode image"
+    }
+  },
+  "9": {
+    "class_type": "LoadBackgroundRemovalModel",
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    },
+    "_meta": {
+      "title": "Local background model: BiRefNet"
+    }
+  },
+  "10": {
+    "class_type": "RemoveBackground",
+    "inputs": {
+      "bg_removal_model": [
+        "9",
+        0
+      ],
+      "image": [
+        "8",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Find foreground"
+    }
+  },
+  "11": {
+    "class_type": "InvertMask",
+    "inputs": {
+      "mask": [
+        "10",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Convert foreground mask to transparency mask"
+    }
+  },
+  "12": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "8",
+        0
+      ],
+      "alpha": [
+        "11",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Create RGBA"
+    }
+  },
+  "13": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "12",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 256,
+      "height": 256,
+      "crop": "disabled"
+    },
+    "_meta": {
+      "title": "Target asset size: 256 x 256"
+    }
+  },
+  "20": {
+    "class_type": "PreviewImage",
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Preview"
+    }
+  },
+  "21": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ],
+      "filename_prefix": "Game_UI_Asset"
+    },
+    "_meta": {
+      "title": "Save PNG to Output"
+    }
+  }
+}

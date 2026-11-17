@@ -1,0 +1,1585 @@
+{
+  "id": "049a562a-d77c-4dcb-a9d2-bcbcc5ad29f5",
+  "revision": 0,
+  "last_node_id": 33,
+  "last_link_id": 38,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "title": "FLUX.2 Klein 4B FP8",
+      "pos": [
+        490,
+        65
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux-2-klein-4b-fp8.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "title": "Qwen3 4B FP4 encoder",
+      "pos": [
+        490,
+        225
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen_3_4b_fp4_flux2.safetensors",
+        "flux2",
+        "default"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "title": "FLUX.2 VAE",
+      "pos": [
+        490,
+        385
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            12,
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "flux2-vae.safetensors"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "title": "3 · Что изменить внутри маски",
+      "pos": [
+        0,
+        715
+      ],
+      "size": [
+        345,
+        175
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Remove the entire Play lettering and the triangular play icon. Fill the cleared area with the smooth green shading and gradients of the same button. Preserve the glossy button face and leave a clean blank label area. Keep the original rim and leaves."
+      ]
+    },
+    {
+      "id": 8,
+      "type": "Flux2Scheduler",
+      "title": "Steps (distilled default: 4)",
+      "pos": [
+        980,
+        545
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 2,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 3,
+          "widget": {
+            "name": "height"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Flux2Scheduler"
+      },
+      "widgets_values": [
+        4,
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": 9,
+      "type": "RandomNoise",
+      "title": "Seed",
+      "pos": [
+        0,
+        1075
+      ],
+      "size": [
+        305,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        451721,
+        "fixed"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "KSamplerSelect",
+      "title": "Sampler",
+      "pos": [
+        980,
+        705
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "BasicGuider",
+      "title": "Distilled guidance (CFG 1)",
+      "pos": [
+        980,
+        865
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 4
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "SamplerCustomAdvanced",
+      "title": "Generate",
+      "pos": [
+        1470,
+        65
+      ],
+      "size": [
+        305,
+        150
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 6
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 7
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 8
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 9
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            11
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 13,
+      "type": "VAEDecode",
+      "title": "Decode",
+      "pos": [
+        1470,
+        240
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 11
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            30
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 14,
+      "type": "PreviewImage",
+      "title": "Preview",
+      "pos": [
+        1960,
+        65
+      ],
+      "size": [
+        440,
+        345
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 15,
+      "type": "SaveImage",
+      "title": "Output prefix",
+      "pos": [
+        1960,
+        435
+      ],
+      "size": [
+        440,
+        345
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "JigaSwagPuzzle/GameArt_Final/Precision_Edit/Asset"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "LoadImage",
+      "title": "1 · Оригинал",
+      "pos": [
+        0,
+        65
+      ],
+      "size": [
+        345,
+        300
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            19,
+            29,
+            32
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            35
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "GameArt_Benchmark_Play_Reference.png"
+      ]
+    },
+    {
+      "id": 17,
+      "type": "VAEEncode",
+      "title": "Encode reference",
+      "pos": [
+        980,
+        65
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 15
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 16
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            18,
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 18,
+      "type": "ReferenceLatent",
+      "title": "Condition on reference",
+      "pos": [
+        980,
+        225
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 17
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": 18
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ReferenceLatent"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 20,
+      "type": "LoadImage",
+      "title": "2 · Маска · Open in MaskEditor",
+      "pos": [
+        0,
+        390
+      ],
+      "size": [
+        345,
+        300
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": []
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            22,
+            23,
+            27
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "GameArt_Final_Play_Mask_v3.png"
+      ]
+    },
+    {
+      "id": 21,
+      "type": "ImageScaleToTotalPixels",
+      "title": "Рабочий размер для модели",
+      "pos": [
+        490,
+        545
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            15,
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleToTotalPixels"
+      },
+      "widgets_values": [
+        "lanczos",
+        0.65,
+        32
+      ]
+    },
+    {
+      "id": 22,
+      "type": "GetImageSize",
+      "title": "Размер для расписания",
+      "pos": [
+        490,
+        705
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            2
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GetImageSize"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 23,
+      "type": "SetLatentNoiseMask",
+      "title": "Шум только внутри маски",
+      "pos": [
+        980,
+        385
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 21
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SetLatentNoiseMask"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 30,
+      "type": "GrowMask",
+      "title": "Отступ от края для растушёвки",
+      "pos": [
+        1470,
+        400
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            24
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GrowMask"
+      },
+      "widgets_values": [
+        -12,
+        true
+      ]
+    },
+    {
+      "id": 24,
+      "type": "MaskToImage",
+      "title": "Маска для плавного края",
+      "pos": [
+        1470,
+        560
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 24
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskToImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 25,
+      "type": "ImageBlur",
+      "title": "4 · Мягкость шва",
+      "pos": [
+        0,
+        915
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 25
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageBlur"
+      },
+      "widgets_values": [
+        24,
+        8.0
+      ]
+    },
+    {
+      "id": 26,
+      "type": "ImageToMask",
+      "title": "Вернуть маску",
+      "pos": [
+        1470,
+        720
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageToMask"
+      },
+      "widgets_values": [
+        "red"
+      ]
+    },
+    {
+      "id": 27,
+      "type": "MaskComposite",
+      "title": "Смягчить только внутрь",
+      "pos": [
+        1470,
+        880
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "MASK",
+          "link": 27
+        },
+        {
+          "name": "source",
+          "type": "MASK",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            31
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskComposite"
+      },
+      "widgets_values": [
+        0,
+        0,
+        "multiply"
+      ]
+    },
+    {
+      "id": 28,
+      "type": "ImageCompositeMasked",
+      "title": "Перенести правку на исходный PNG",
+      "pos": [
+        1470,
+        1040
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "IMAGE",
+          "link": 29
+        },
+        {
+          "name": "source",
+          "type": "IMAGE",
+          "link": 30
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            37
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageCompositeMasked"
+      },
+      "widgets_values": [
+        0,
+        0,
+        true
+      ]
+    },
+    {
+      "id": 31,
+      "type": "GetImageSize",
+      "title": "Исходное разрешение",
+      "pos": [
+        1470,
+        1200
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 32
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            33
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            34
+          ]
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GetImageSize"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 32,
+      "type": "SolidMask",
+      "title": "Смещение для округления 8-битной альфы",
+      "pos": [
+        1470,
+        1360
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 33,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 34,
+          "widget": {
+            "name": "height"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            36
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SolidMask"
+      },
+      "widgets_values": [
+        0.00196078431372549,
+        512,
+        512
+      ]
+    },
+    {
+      "id": 33,
+      "type": "MaskComposite",
+      "title": "Округлить альфу при сохранении",
+      "pos": [
+        1470,
+        1520
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "MASK",
+          "link": 35
+        },
+        {
+          "name": "source",
+          "type": "MASK",
+          "link": 36
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            38
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskComposite"
+      },
+      "widgets_values": [
+        0,
+        0,
+        "subtract"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "JoinImageWithAlpha",
+      "title": "Вернуть альфу исходника",
+      "pos": [
+        1470,
+        1680
+      ],
+      "size": [
+        305,
+        135
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 37
+        },
+        {
+          "name": "alpha",
+          "type": "MASK",
+          "link": 38
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            13,
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "JoinImageWithAlpha"
+      },
+      "widgets_values": []
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      2,
+      22,
+      0,
+      8,
+      0,
+      "INT"
+    ],
+    [
+      3,
+      22,
+      1,
+      8,
+      1,
+      "INT"
+    ],
+    [
+      4,
+      1,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      5,
+      18,
+      0,
+      11,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      6,
+      9,
+      0,
+      12,
+      0,
+      "NOISE"
+    ],
+    [
+      7,
+      11,
+      0,
+      12,
+      1,
+      "GUIDER"
+    ],
+    [
+      8,
+      10,
+      0,
+      12,
+      2,
+      "SAMPLER"
+    ],
+    [
+      9,
+      8,
+      0,
+      12,
+      3,
+      "SIGMAS"
+    ],
+    [
+      10,
+      23,
+      0,
+      12,
+      4,
+      "LATENT"
+    ],
+    [
+      11,
+      12,
+      0,
+      13,
+      0,
+      "LATENT"
+    ],
+    [
+      12,
+      3,
+      0,
+      13,
+      1,
+      "VAE"
+    ],
+    [
+      13,
+      29,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      14,
+      29,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ],
+    [
+      15,
+      21,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      16,
+      3,
+      0,
+      17,
+      1,
+      "VAE"
+    ],
+    [
+      17,
+      4,
+      0,
+      18,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      18,
+      17,
+      0,
+      18,
+      1,
+      "LATENT"
+    ],
+    [
+      19,
+      16,
+      0,
+      21,
+      0,
+      "IMAGE"
+    ],
+    [
+      20,
+      21,
+      0,
+      22,
+      0,
+      "IMAGE"
+    ],
+    [
+      21,
+      17,
+      0,
+      23,
+      0,
+      "LATENT"
+    ],
+    [
+      22,
+      20,
+      1,
+      23,
+      1,
+      "MASK"
+    ],
+    [
+      23,
+      20,
+      1,
+      30,
+      0,
+      "MASK"
+    ],
+    [
+      24,
+      30,
+      0,
+      24,
+      0,
+      "MASK"
+    ],
+    [
+      25,
+      24,
+      0,
+      25,
+      0,
+      "IMAGE"
+    ],
+    [
+      26,
+      25,
+      0,
+      26,
+      0,
+      "IMAGE"
+    ],
+    [
+      27,
+      20,
+      1,
+      27,
+      0,
+      "MASK"
+    ],
+    [
+      28,
+      26,
+      0,
+      27,
+      1,
+      "MASK"
+    ],
+    [
+      29,
+      16,
+      0,
+      28,
+      0,
+      "IMAGE"
+    ],
+    [
+      30,
+      13,
+      0,
+      28,
+      1,
+      "IMAGE"
+    ],
+    [
+      31,
+      27,
+      0,
+      28,
+      2,
+      "MASK"
+    ],
+    [
+      32,
+      16,
+      0,
+      31,
+      0,
+      "IMAGE"
+    ],
+    [
+      33,
+      31,
+      0,
+      32,
+      0,
+      "INT"
+    ],
+    [
+      34,
+      31,
+      1,
+      32,
+      1,
+      "INT"
+    ],
+    [
+      35,
+      16,
+      1,
+      33,
+      0,
+      "MASK"
+    ],
+    [
+      36,
+      32,
+      0,
+      33,
+      1,
+      "MASK"
+    ],
+    [
+      37,
+      28,
+      0,
+      29,
+      0,
+      "IMAGE"
+    ],
+    [
+      38,
+      33,
+      0,
+      29,
+      1,
+      "MASK"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Настройки",
+      "bounding": [
+        -14,
+        20,
+        466,
+        1186
+      ],
+      "color": "#287b67",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "Подготовка",
+      "bounding": [
+        476,
+        20,
+        466,
+        841
+      ],
+      "color": "#425d76",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Условия модели",
+      "bounding": [
+        966,
+        20,
+        466,
+        1001
+      ],
+      "color": "#425d76",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "Генерация и обработка",
+      "bounding": [
+        1456,
+        20,
+        466,
+        1816
+      ],
+      "color": "#425d76",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "Готовый PNG",
+      "bounding": [
+        1946,
+        20,
+        466,
+        781
+      ],
+      "color": "#425d76",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.72,
+      "offset": [
+        38,
+        44
+      ]
+    }
+  },
+  "version": 0.4
+}

@@ -1,0 +1,29 @@
+name: Validate pipeline source
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install launcher test dependency
+        shell: pwsh
+        run: |
+          $requirement = Get-Content Config/application.windows-cu130.lock.txt | Where-Object { $_ -match '^psutil==' }
+          python -m pip install $requirement
+      - run: python Scripts/validate_repository.py
+      - run: python -B -m unittest discover -s Tests
+      - name: Validate PowerShell syntax and install plan
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Join-Path $PWD 'Install.ps1'), [ref]$tokens, [ref]$parseErrors) | Out-Null
+          if ($parseErrors.Count) { throw ($parseErrors | Out-String) }
+          ./Install.ps1 -Profile ui

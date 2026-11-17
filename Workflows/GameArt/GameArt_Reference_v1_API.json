@@ -1,0 +1,241 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-4b-fp8.safetensors",
+      "weight_dtype": "default"
+    },
+    "_meta": {
+      "title": "FLUX.2 Klein 4B FP8"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen_3_4b_fp4_flux2.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "_meta": {
+      "title": "Qwen3 4B FP4 encoder"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    },
+    "_meta": {
+      "title": "FLUX.2 VAE"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "Use the reference button as the style and shape guide. Keep the same wide rounded rectangle, blank center, thin ivory and muted antique gold border, front view, and flat warm gray background. Change only the face from emerald green to deep sapphire blue. Preserve the soft painted shading and restrained highlights. No text, symbols, or ornaments.",
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Prompt"
+    }
+  },
+  "5": {
+    "class_type": "PrimitiveInt",
+    "inputs": {
+      "value": 1024
+    },
+    "_meta": {
+      "title": "Width (multiple of 32)"
+    }
+  },
+  "6": {
+    "class_type": "PrimitiveInt",
+    "inputs": {
+      "value": 640
+    },
+    "_meta": {
+      "title": "Height (multiple of 32)"
+    }
+  },
+  "7": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "width": [
+        "5",
+        0
+      ],
+      "height": [
+        "6",
+        0
+      ],
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Canvas and batch count"
+    }
+  },
+  "8": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": [
+        "5",
+        0
+      ],
+      "height": [
+        "6",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Steps (distilled default: 4)"
+    }
+  },
+  "9": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 451721
+    },
+    "_meta": {
+      "title": "Seed"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "_meta": {
+      "title": "Sampler"
+    }
+  },
+  "11": {
+    "class_type": "BasicGuider",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "conditioning": [
+        "18",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Distilled guidance (CFG 1)"
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "9",
+        0
+      ],
+      "guider": [
+        "11",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "8",
+        0
+      ],
+      "latent_image": [
+        "7",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Generate"
+    }
+  },
+  "13": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Decode"
+    }
+  },
+  "14": {
+    "class_type": "PreviewImage",
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Preview"
+    }
+  },
+  "15": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ],
+      "filename_prefix": "JigaSwagPuzzle/Tests/GameArt_Modern_v1/Reference_Klein4B_FP8_1024x640"
+    },
+    "_meta": {
+      "title": "Output prefix"
+    }
+  },
+  "16": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "GameArt_Reference_v1_Button.png"
+    },
+    "_meta": {
+      "title": "Reference image"
+    }
+  },
+  "17": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "16",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Encode reference"
+    }
+  },
+  "18": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "4",
+        0
+      ],
+      "latent": [
+        "17",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Condition on reference"
+    }
+  }
+}

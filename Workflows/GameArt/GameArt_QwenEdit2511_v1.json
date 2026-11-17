@@ -1,0 +1,833 @@
+{
+  "id": "c4b4fcb0-c85b-49c2-b096-572d1c8249f2",
+  "revision": 0,
+  "last_node_id": 16,
+  "last_link_id": 21,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "title": "Diffusion model",
+      "pos": [
+        0,
+        40
+      ],
+      "size": [
+        320,
+        105
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "qwen_image_edit_2511_nvfp4.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "title": "Text encoder",
+      "pos": [
+        0,
+        180
+      ],
+      "size": [
+        320,
+        105
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1,
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen_2.5_vl_7b_nvfp4.safetensors",
+        "qwen_image",
+        "default"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "title": "VAE",
+      "pos": [
+        0,
+        340
+      ],
+      "size": [
+        320,
+        105
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            2,
+            5,
+            9,
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "qwen_image_vae.safetensors"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "TextEncodeQwenImageEditPlus",
+      "title": "Edit instruction",
+      "pos": [
+        370,
+        40
+      ],
+      "size": [
+        420,
+        270
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 2
+        },
+        {
+          "name": "image1",
+          "type": "IMAGE",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TextEncodeQwenImageEditPlus"
+      },
+      "widgets_values": [
+        "Remove the entire Play lettering and the triangular play icon from the reference button. Fill that area with the surrounding green gradient to create a clean reusable empty horizontal button template. Preserve the original overall shape, proportions, placement, composition and premium illustrated casual-game visual language. Keep the green face, warm cream and gold trim, side leaves, restrained shading, and readable silhouette. Keep the label area clean and empty. Do not redesign it into a medal, badge, jewel or ornament."
+      ]
+    },
+    {
+      "id": 5,
+      "type": "TextEncodeQwenImageEditPlus",
+      "title": "Negative conditioning",
+      "pos": [
+        370,
+        370
+      ],
+      "size": [
+        235,
+        105
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 5
+        },
+        {
+          "name": "image1",
+          "type": "IMAGE",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TextEncodeQwenImageEditPlus"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 6,
+      "type": "ModelSamplingAuraFlow",
+      "title": "Flow shift",
+      "pos": [
+        870,
+        40
+      ],
+      "size": [
+        235,
+        105
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingAuraFlow"
+      },
+      "widgets_values": [
+        3.1
+      ]
+    },
+    {
+      "id": 7,
+      "type": "VAEEncode",
+      "title": "Canvas from reference",
+      "pos": [
+        370,
+        680
+      ],
+      "size": [
+        235,
+        105
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 8
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 8,
+      "type": "KSampler",
+      "title": "Seed, steps and CFG",
+      "pos": [
+        1170,
+        240
+      ],
+      "size": [
+        250,
+        300
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 10
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 11
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 12
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        730101,
+        "fixed",
+        40,
+        3.0,
+        "euler",
+        "simple",
+        1.0
+      ]
+    },
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "title": "Decode",
+      "pos": [
+        1450,
+        240
+      ],
+      "size": [
+        235,
+        105
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 14
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            16,
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 10,
+      "type": "PreviewImage",
+      "title": "Preview",
+      "pos": [
+        1740,
+        40
+      ],
+      "size": [
+        390,
+        300
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 16
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 11,
+      "type": "SaveImage",
+      "title": "Output prefix",
+      "pos": [
+        1740,
+        460
+      ],
+      "size": [
+        390,
+        300
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "JigaSwagPuzzle/Benchmarks/QwenEdit2511/Reference"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "LoadImage",
+      "title": "Button reference",
+      "pos": [
+        0,
+        500
+      ],
+      "size": [
+        390,
+        300
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            18
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "GameArt_Benchmark_Play_Reference.png"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "ImageScale",
+      "title": "Resize reference without cropping",
+      "pos": [
+        0,
+        840
+      ],
+      "size": [
+        390,
+        320
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 18
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            3,
+            6,
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale"
+      },
+      "widgets_values": [
+        "lanczos",
+        1312,
+        448,
+        "disabled"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "FluxKontextMultiReferenceLatentMethod",
+      "title": "Reference placement",
+      "pos": [
+        870,
+        350
+      ],
+      "size": [
+        235,
+        105
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxKontextMultiReferenceLatentMethod"
+      },
+      "widgets_values": [
+        "index_timestep_zero"
+      ]
+    },
+    {
+      "id": 14,
+      "type": "FluxKontextMultiReferenceLatentMethod",
+      "title": "Reference placement (negative)",
+      "pos": [
+        870,
+        520
+      ],
+      "size": [
+        390,
+        320
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxKontextMultiReferenceLatentMethod"
+      },
+      "widgets_values": [
+        "index_timestep_zero"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "CFGNorm",
+      "title": "Normalize guidance",
+      "pos": [
+        870,
+        185
+      ],
+      "size": [
+        390,
+        320
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "patched_model",
+          "type": "MODEL",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CFGNorm"
+      },
+      "widgets_values": [
+        1.0
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      2,
+      3,
+      0,
+      4,
+      1,
+      "VAE"
+    ],
+    [
+      3,
+      16,
+      0,
+      4,
+      2,
+      "IMAGE"
+    ],
+    [
+      4,
+      2,
+      0,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      3,
+      0,
+      5,
+      1,
+      "VAE"
+    ],
+    [
+      6,
+      16,
+      0,
+      5,
+      2,
+      "IMAGE"
+    ],
+    [
+      7,
+      1,
+      0,
+      6,
+      0,
+      "MODEL"
+    ],
+    [
+      8,
+      16,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ],
+    [
+      9,
+      3,
+      0,
+      7,
+      1,
+      "VAE"
+    ],
+    [
+      10,
+      15,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      11,
+      13,
+      0,
+      8,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      14,
+      0,
+      8,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      13,
+      7,
+      0,
+      8,
+      3,
+      "LATENT"
+    ],
+    [
+      14,
+      8,
+      0,
+      9,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      3,
+      0,
+      9,
+      1,
+      "VAE"
+    ],
+    [
+      16,
+      9,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      17,
+      9,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      12,
+      0,
+      16,
+      0,
+      "IMAGE"
+    ],
+    [
+      19,
+      4,
+      0,
+      13,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      20,
+      5,
+      0,
+      14,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      21,
+      6,
+      0,
+      15,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6,
+      "offset": [
+        30,
+        45
+      ]
+    }
+  },
+  "version": 0.4
+}

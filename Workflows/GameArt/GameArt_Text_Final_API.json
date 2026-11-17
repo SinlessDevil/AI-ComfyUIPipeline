@@ -1,0 +1,448 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-4b-fp8.safetensors",
+      "weight_dtype": "default"
+    },
+    "_meta": {
+      "title": "FLUX.2 Klein 4B FP8"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen_3_4b_fp4_flux2.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "_meta": {
+      "title": "Qwen3 4B FP4 encoder"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    },
+    "_meta": {
+      "title": "FLUX.2 VAE"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": [
+        "33",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Prompt"
+    }
+  },
+  "5": {
+    "class_type": "PrimitiveInt",
+    "inputs": {
+      "value": 1024
+    },
+    "_meta": {
+      "title": "6 · Ширина (кратно 32)"
+    }
+  },
+  "6": {
+    "class_type": "PrimitiveInt",
+    "inputs": {
+      "value": 640
+    },
+    "_meta": {
+      "title": "7 · Высота (кратно 32)"
+    }
+  },
+  "7": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "width": [
+        "5",
+        0
+      ],
+      "height": [
+        "6",
+        0
+      ],
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Canvas and batch count"
+    }
+  },
+  "8": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": [
+        "5",
+        0
+      ],
+      "height": [
+        "6",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Steps (distilled default: 4)"
+    }
+  },
+  "9": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 451721
+    },
+    "_meta": {
+      "title": "8 · Seed"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "_meta": {
+      "title": "Sampler"
+    }
+  },
+  "11": {
+    "class_type": "BasicGuider",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "conditioning": [
+        "4",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Distilled guidance (CFG 1)"
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "9",
+        0
+      ],
+      "guider": [
+        "11",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "8",
+        0
+      ],
+      "latent_image": [
+        "7",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Generate"
+    }
+  },
+  "13": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Decode"
+    }
+  },
+  "14": {
+    "class_type": "PreviewImage",
+    "inputs": {
+      "images": [
+        "38",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Preview"
+    }
+  },
+  "15": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "38",
+        0
+      ],
+      "filename_prefix": "JigaSwagPuzzle/GameArt_Final/Text_to_Asset/Asset"
+    },
+    "_meta": {
+      "title": "9 · Сохранить PNG"
+    }
+  },
+  "20": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "A single wide horizontal mobile game menu button. A deep emerald-green uninterrupted face, thin warm ivory rim and muted gold border. Long rounded rectangle about four times wider than tall. Front view, centered with generous margin. No text, icon or ornaments."
+    },
+    "_meta": {
+      "title": "1 · Что создать"
+    }
+  },
+  "21": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "Premium illustrated casual puzzle-adventure UI. Clean silhouette, soft painted gradients, a shallow bevel and restrained color. Isolated on a flat neutral background."
+    },
+    "_meta": {
+      "title": "2 · Стиль"
+    }
+  },
+  "22": {
+    "class_type": "PrimitiveBoolean",
+    "inputs": {
+      "value": true
+    },
+    "_meta": {
+      "title": "3 · Убрать фон → PNG с альфой"
+    }
+  },
+  "23": {
+    "class_type": "PrimitiveBoolean",
+    "inputs": {
+      "value": false
+    },
+    "_meta": {
+      "title": "4 · Добавить тень"
+    }
+  },
+  "24": {
+    "class_type": "PrimitiveBoolean",
+    "inputs": {
+      "value": true
+    },
+    "_meta": {
+      "title": "5 · Добавить блики"
+    }
+  },
+  "25": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "No cast shadow. No contact shadow. Use even diffuse shading."
+    },
+    "_meta": {
+      "title": "Инструкция для промпта"
+    }
+  },
+  "26": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "Add a small soft contact shadow directly beneath the object, no dramatic lighting."
+    },
+    "_meta": {
+      "title": "Инструкция для промпта"
+    }
+  },
+  "27": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "Matte surface. No specular highlight or gleam."
+    },
+    "_meta": {
+      "title": "Инструкция для промпта"
+    }
+  },
+  "28": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "Add a restrained thin edge highlight and a small controlled specular gleam."
+    },
+    "_meta": {
+      "title": "Инструкция для промпта"
+    }
+  },
+  "29": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": [
+        "23",
+        0
+      ],
+      "on_false": [
+        "25",
+        0
+      ],
+      "on_true": [
+        "26",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Тень: текст"
+    }
+  },
+  "30": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": [
+        "24",
+        0
+      ],
+      "on_false": [
+        "27",
+        0
+      ],
+      "on_true": [
+        "28",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Блики: текст"
+    }
+  },
+  "31": {
+    "class_type": "StringConcatenate",
+    "inputs": {
+      "string_a": [
+        "20",
+        0
+      ],
+      "string_b": [
+        "21",
+        0
+      ],
+      "delimiter": "\n"
+    },
+    "_meta": {
+      "title": "Собрать промпт"
+    }
+  },
+  "32": {
+    "class_type": "StringConcatenate",
+    "inputs": {
+      "string_a": [
+        "29",
+        0
+      ],
+      "string_b": [
+        "30",
+        0
+      ],
+      "delimiter": "\n"
+    },
+    "_meta": {
+      "title": "Собрать промпт"
+    }
+  },
+  "33": {
+    "class_type": "StringConcatenate",
+    "inputs": {
+      "string_a": [
+        "31",
+        0
+      ],
+      "string_b": [
+        "32",
+        0
+      ],
+      "delimiter": "\n"
+    },
+    "_meta": {
+      "title": "Собрать промпт"
+    }
+  },
+  "34": {
+    "class_type": "LoadBackgroundRemovalModel",
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    },
+    "_meta": {
+      "title": "BiRefNet"
+    }
+  },
+  "35": {
+    "class_type": "RemoveBackground",
+    "inputs": {
+      "bg_removal_model": [
+        "34",
+        0
+      ],
+      "image": [
+        "13",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Выделить предмет"
+    }
+  },
+  "36": {
+    "class_type": "InvertMask",
+    "inputs": {
+      "mask": [
+        "35",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Маска прозрачности"
+    }
+  },
+  "37": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "13",
+        0
+      ],
+      "alpha": [
+        "36",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Добавить альфа-канал"
+    }
+  },
+  "38": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": [
+        "22",
+        0
+      ],
+      "on_false": [
+        "13",
+        0
+      ],
+      "on_true": [
+        "37",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Выход RGB или RGBA"
+    }
+  }
+}

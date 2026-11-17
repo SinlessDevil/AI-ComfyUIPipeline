@@ -1,0 +1,417 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-4b-fp8.safetensors",
+      "weight_dtype": "default"
+    },
+    "_meta": {
+      "title": "FLUX.2 Klein 4B FP8"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen_3_4b_fp4_flux2.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "_meta": {
+      "title": "Qwen3 4B FP4 encoder"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    },
+    "_meta": {
+      "title": "FLUX.2 VAE"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "2",
+        0
+      ],
+      "text": "Remove the entire Play lettering and the triangular play icon. Fill the cleared area with the smooth green shading and gradients of the same button. Preserve the glossy button face and leave a clean blank label area. Keep the original rim and leaves."
+    },
+    "_meta": {
+      "title": "3 · Что изменить внутри маски"
+    }
+  },
+  "8": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": [
+        "22",
+        0
+      ],
+      "height": [
+        "22",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Steps (distilled default: 4)"
+    }
+  },
+  "9": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 451721
+    },
+    "_meta": {
+      "title": "Seed"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "_meta": {
+      "title": "Sampler"
+    }
+  },
+  "11": {
+    "class_type": "BasicGuider",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "conditioning": [
+        "18",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Distilled guidance (CFG 1)"
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "9",
+        0
+      ],
+      "guider": [
+        "11",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "8",
+        0
+      ],
+      "latent_image": [
+        "23",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Generate"
+    }
+  },
+  "13": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Decode"
+    }
+  },
+  "14": {
+    "class_type": "PreviewImage",
+    "inputs": {
+      "images": [
+        "29",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Preview"
+    }
+  },
+  "15": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "29",
+        0
+      ],
+      "filename_prefix": "JigaSwagPuzzle/GameArt_Final/Precision_Edit/Asset"
+    },
+    "_meta": {
+      "title": "Output prefix"
+    }
+  },
+  "16": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "GameArt_Benchmark_Play_Reference.png"
+    },
+    "_meta": {
+      "title": "1 · Оригинал"
+    }
+  },
+  "17": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "21",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Encode reference"
+    }
+  },
+  "18": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "4",
+        0
+      ],
+      "latent": [
+        "17",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Condition on reference"
+    }
+  },
+  "20": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "GameArt_Final_Play_Mask_v3.png"
+    },
+    "_meta": {
+      "title": "2 · Маска · Open in MaskEditor"
+    }
+  },
+  "21": {
+    "class_type": "ImageScaleToTotalPixels",
+    "inputs": {
+      "image": [
+        "16",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "megapixels": 0.65,
+      "resolution_steps": 32
+    },
+    "_meta": {
+      "title": "Рабочий размер для модели"
+    }
+  },
+  "22": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "21",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Размер для расписания"
+    }
+  },
+  "23": {
+    "class_type": "SetLatentNoiseMask",
+    "inputs": {
+      "samples": [
+        "17",
+        0
+      ],
+      "mask": [
+        "20",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Шум только внутри маски"
+    }
+  },
+  "30": {
+    "class_type": "GrowMask",
+    "inputs": {
+      "mask": [
+        "20",
+        1
+      ],
+      "expand": -12,
+      "tapered_corners": true
+    },
+    "_meta": {
+      "title": "Отступ от края для растушёвки"
+    }
+  },
+  "24": {
+    "class_type": "MaskToImage",
+    "inputs": {
+      "mask": [
+        "30",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Маска для плавного края"
+    }
+  },
+  "25": {
+    "class_type": "ImageBlur",
+    "inputs": {
+      "image": [
+        "24",
+        0
+      ],
+      "blur_radius": 24,
+      "sigma": 8.0
+    },
+    "_meta": {
+      "title": "4 · Мягкость шва"
+    }
+  },
+  "26": {
+    "class_type": "ImageToMask",
+    "inputs": {
+      "image": [
+        "25",
+        0
+      ],
+      "channel": "red"
+    },
+    "_meta": {
+      "title": "Вернуть маску"
+    }
+  },
+  "27": {
+    "class_type": "MaskComposite",
+    "inputs": {
+      "destination": [
+        "20",
+        1
+      ],
+      "source": [
+        "26",
+        0
+      ],
+      "x": 0,
+      "y": 0,
+      "operation": "multiply"
+    },
+    "_meta": {
+      "title": "Смягчить только внутрь"
+    }
+  },
+  "28": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "16",
+        0
+      ],
+      "source": [
+        "13",
+        0
+      ],
+      "mask": [
+        "27",
+        0
+      ],
+      "x": 0,
+      "y": 0,
+      "resize_source": true
+    },
+    "_meta": {
+      "title": "Перенести правку на исходный PNG"
+    }
+  },
+  "31": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "16",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Исходное разрешение"
+    }
+  },
+  "32": {
+    "class_type": "SolidMask",
+    "inputs": {
+      "value": 0.00196078431372549,
+      "width": [
+        "31",
+        0
+      ],
+      "height": [
+        "31",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Смещение для округления 8-битной альфы"
+    }
+  },
+  "33": {
+    "class_type": "MaskComposite",
+    "inputs": {
+      "destination": [
+        "16",
+        1
+      ],
+      "source": [
+        "32",
+        0
+      ],
+      "x": 0,
+      "y": 0,
+      "operation": "subtract"
+    },
+    "_meta": {
+      "title": "Округлить альфу при сохранении"
+    }
+  },
+  "29": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "28",
+        0
+      ],
+      "alpha": [
+        "33",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Вернуть альфу исходника"
+    }
+  }
+}
