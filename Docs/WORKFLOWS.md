@@ -1,5 +1,7 @@
 # Workflow guide
 
+The four maintained 2D GameArt graphs now include selectable cutout finishing. See [cutout modes and upgrade notes](CUTOUT.md). `Tests/GameArt_Cutout_Finish_Test` compares the previous BiRefNet export with the new stage on the same image; choose your own isolated asset in its LoadImage node. Material modes require an appropriate glyph region and must not be used on the whole green plate.
+
 ## Starter workflows
 
 These graphs use built-in nodes. SD 1.5 is the small baseline model; its settings are not interchangeable with FLUX, Qwen, or Z-Image.

@@ -1,6 +1,6 @@
 # AI ComfyUI Pipeline
 
-Private, reproducible home for our ComfyUI game-art workflows, local launch tools, MCP connection, sprite edge cleanup, and UI asset skill.
+Reproducible home for our ComfyUI game-art workflows, local launch tools, MCP connection, sprite edge cleanup, and UI asset skill.
 
 ## Install with an agent
 
@@ -16,8 +16,6 @@ Start the local backend and verify workflow discovery, a fresh generation,
 job completion, output retrieval, and a useful workflow error through MCP.
 Report the actual image path and any remaining failures. Preserve existing art.
 ```
-
-The repository is private, so the receiving device/agent needs authorized GitHub access.
 
 ## Windows quick start
 
@@ -85,10 +83,13 @@ QA report, and a Before/After Gallery.html in the output folder I provide.
 
 ## Repository contents
 
+The maintained 2D graphs include selectable alpha/RGB edge cleanup and a dedicated gold/ivory glyph mode. Retouch preserves source alpha by default. See the [cutout guide](Docs/CUTOUT.md), including upgrade instructions for existing installations.
+
 - `Workflows/`: maintained UI graphs and backend API forms.
 - `WorkflowLibrary/`: snapshot of interface-visible Starter, GameArt, and 3D graphs. Installation copies missing files into the local UI library and preserves existing ones.
 - `Scripts/`, `Tests/`: launch, model download/verification, smoke test, mask refinement, and tests.
 - `Config/`: pinned runtime, application/MCP package snapshots, and model catalog.
+- `CustomNodes/`: bundled local cutout node; the installer also restores the pinned upstream Image-Filters pack.
 - `skills/`: bundled UI asset skill and gallery builder.
 - `Examples/PuzzleChronicles/`: screen-specific extraction/reconstruction recipes from the existing pipeline.
 - `Docs/`: installation, hardware, models, MCP, workflow guidance, and validation record.

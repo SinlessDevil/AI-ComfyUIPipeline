@@ -1,0 +1,102 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "GameArt_Benchmark_Play_Reference.png"
+    }
+  },
+  "2": {
+    "class_type": "LoadBackgroundRemovalModel",
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    }
+  },
+  "3": {
+    "class_type": "RemoveBackground",
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "bg_removal_model": [
+        "2",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "InvertMask",
+    "inputs": {
+      "mask": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "GameArtCutoutFinish",
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "alpha": [
+        "4",
+        0
+      ],
+      "mode": "alpha_only",
+      "blackpoint": 0.01,
+      "whitepoint": 0.99,
+      "max_iterations": 1000,
+      "outer_margin": 2,
+      "edge_width": 1,
+      "min_component_fraction": 0.0
+    }
+  },
+  "6": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "5",
+        0
+      ],
+      "alpha": [
+        "5",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "6",
+        0
+      ],
+      "filename_prefix": "GameArt/Cutout_Finish_Test/after"
+    }
+  },
+  "8": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "alpha": [
+        "4",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "8",
+        0
+      ],
+      "filename_prefix": "GameArt/Cutout_Finish_Test/before"
+    }
+  }
+}

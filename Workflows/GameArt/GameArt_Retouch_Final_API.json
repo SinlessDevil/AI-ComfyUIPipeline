@@ -39,7 +39,7 @@
       "text": "Remove the entire Play lettering and the triangular play icon. Fill the cleared area with the smooth green shading and gradients of the same button. Preserve the glossy button face and leave a clean blank label area. Keep the original rim and leaves."
     },
     "_meta": {
-      "title": "3 · Что изменить внутри маски"
+      "title": "3 \u00b7 \u0427\u0442\u043e \u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u0432\u043d\u0443\u0442\u0440\u0438 \u043c\u0430\u0441\u043a\u0438"
     }
   },
   "8": {
@@ -168,7 +168,7 @@
       "image": "GameArt_Benchmark_Play_Reference.png"
     },
     "_meta": {
-      "title": "1 · Оригинал"
+      "title": "1 \u00b7 \u041e\u0440\u0438\u0433\u0438\u043d\u0430\u043b"
     }
   },
   "17": {
@@ -209,7 +209,7 @@
       "image": "GameArt_Final_Play_Mask_v3.png"
     },
     "_meta": {
-      "title": "2 · Маска · Open in MaskEditor"
+      "title": "2 \u00b7 \u041c\u0430\u0441\u043a\u0430 \u00b7 Open in MaskEditor"
     }
   },
   "21": {
@@ -224,7 +224,7 @@
       "resolution_steps": 32
     },
     "_meta": {
-      "title": "Рабочий размер для модели"
+      "title": "\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0440\u0430\u0437\u043c\u0435\u0440 \u0434\u043b\u044f \u043c\u043e\u0434\u0435\u043b\u0438"
     }
   },
   "22": {
@@ -236,7 +236,7 @@
       ]
     },
     "_meta": {
-      "title": "Размер для расписания"
+      "title": "\u0420\u0430\u0437\u043c\u0435\u0440 \u0434\u043b\u044f \u0440\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u044f"
     }
   },
   "23": {
@@ -252,7 +252,7 @@
       ]
     },
     "_meta": {
-      "title": "Шум только внутри маски"
+      "title": "\u0428\u0443\u043c \u0442\u043e\u043b\u044c\u043a\u043e \u0432\u043d\u0443\u0442\u0440\u0438 \u043c\u0430\u0441\u043a\u0438"
     }
   },
   "30": {
@@ -266,7 +266,7 @@
       "tapered_corners": true
     },
     "_meta": {
-      "title": "Отступ от края для растушёвки"
+      "title": "\u041e\u0442\u0441\u0442\u0443\u043f \u043e\u0442 \u043a\u0440\u0430\u044f \u0434\u043b\u044f \u0440\u0430\u0441\u0442\u0443\u0448\u0451\u0432\u043a\u0438"
     }
   },
   "24": {
@@ -278,7 +278,7 @@
       ]
     },
     "_meta": {
-      "title": "Маска для плавного края"
+      "title": "\u041c\u0430\u0441\u043a\u0430 \u0434\u043b\u044f \u043f\u043b\u0430\u0432\u043d\u043e\u0433\u043e \u043a\u0440\u0430\u044f"
     }
   },
   "25": {
@@ -292,7 +292,7 @@
       "sigma": 8.0
     },
     "_meta": {
-      "title": "4 · Мягкость шва"
+      "title": "4 \u00b7 \u041c\u044f\u0433\u043a\u043e\u0441\u0442\u044c \u0448\u0432\u0430"
     }
   },
   "26": {
@@ -305,7 +305,7 @@
       "channel": "red"
     },
     "_meta": {
-      "title": "Вернуть маску"
+      "title": "\u0412\u0435\u0440\u043d\u0443\u0442\u044c \u043c\u0430\u0441\u043a\u0443"
     }
   },
   "27": {
@@ -324,7 +324,7 @@
       "operation": "multiply"
     },
     "_meta": {
-      "title": "Смягчить только внутрь"
+      "title": "\u0421\u043c\u044f\u0433\u0447\u0438\u0442\u044c \u0442\u043e\u043b\u044c\u043a\u043e \u0432\u043d\u0443\u0442\u0440\u044c"
     }
   },
   "28": {
@@ -347,7 +347,7 @@
       "resize_source": true
     },
     "_meta": {
-      "title": "Перенести правку на исходный PNG"
+      "title": "\u041f\u0435\u0440\u0435\u043d\u0435\u0441\u0442\u0438 \u043f\u0440\u0430\u0432\u043a\u0443 \u043d\u0430 \u0438\u0441\u0445\u043e\u0434\u043d\u044b\u0439 PNG"
     }
   },
   "31": {
@@ -359,7 +359,7 @@
       ]
     },
     "_meta": {
-      "title": "Исходное разрешение"
+      "title": "\u0418\u0441\u0445\u043e\u0434\u043d\u043e\u0435 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438\u0435"
     }
   },
   "32": {
@@ -376,7 +376,7 @@
       ]
     },
     "_meta": {
-      "title": "Смещение для округления 8-битной альфы"
+      "title": "\u0421\u043c\u0435\u0449\u0435\u043d\u0438\u0435 \u0434\u043b\u044f \u043e\u043a\u0440\u0443\u0433\u043b\u0435\u043d\u0438\u044f 8-\u0431\u0438\u0442\u043d\u043e\u0439 \u0430\u043b\u044c\u0444\u044b"
     }
   },
   "33": {
@@ -395,11 +395,27 @@
       "operation": "subtract"
     },
     "_meta": {
-      "title": "Округлить альфу при сохранении"
+      "title": "\u041e\u043a\u0440\u0443\u0433\u043b\u0438\u0442\u044c \u0430\u043b\u044c\u0444\u0443 \u043f\u0440\u0438 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0438"
     }
   },
   "29": {
     "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "34",
+        0
+      ],
+      "alpha": [
+        "34",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "\u0412\u0435\u0440\u043d\u0443\u0442\u044c \u0430\u043b\u044c\u0444\u0443 \u0438\u0441\u0445\u043e\u0434\u043d\u0438\u043a\u0430"
+    }
+  },
+  "34": {
+    "class_type": "GameArtCutoutFinish",
     "inputs": {
       "image": [
         "28",
@@ -408,10 +424,17 @@
       "alpha": [
         "33",
         0
-      ]
+      ],
+      "mode": "off",
+      "blackpoint": 0.01,
+      "whitepoint": 0.99,
+      "max_iterations": 1000,
+      "outer_margin": 2,
+      "edge_width": 1,
+      "min_component_fraction": 0.0
     },
     "_meta": {
-      "title": "Вернуть альфу исходника"
+      "title": "Cutout finish - preserve source alpha"
     }
   }
 }

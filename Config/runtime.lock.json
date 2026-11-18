@@ -11,5 +11,16 @@
   "torch": "2.14.1+cu130",
   "torchvision": "0.29.1+cu130",
   "torch_index": "https://download.pytorch.org/whl/cu130",
-  "custom_node_packs": []
+  "custom_node_packs": [
+    {
+      "name": "GameArt_CutoutLab",
+      "source": "bundled"
+    },
+    {
+      "name": "ComfyUI-Image-Filters",
+      "source": "git",
+      "repository": "https://github.com/spacepxl/ComfyUI-Image-Filters.git",
+      "commit": "3d9184c45bcdd079d96718dc936150b68f5e41ba"
+    }
+  ]
 }

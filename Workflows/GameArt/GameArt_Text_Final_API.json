@@ -51,7 +51,7 @@
       "value": 1024
     },
     "_meta": {
-      "title": "6 · Ширина (кратно 32)"
+      "title": "6 \u00b7 \u0428\u0438\u0440\u0438\u043d\u0430 (\u043a\u0440\u0430\u0442\u043d\u043e 32)"
     }
   },
   "6": {
@@ -60,7 +60,7 @@
       "value": 640
     },
     "_meta": {
-      "title": "7 · Высота (кратно 32)"
+      "title": "7 \u00b7 \u0412\u044b\u0441\u043e\u0442\u0430 (\u043a\u0440\u0430\u0442\u043d\u043e 32)"
     }
   },
   "7": {
@@ -103,7 +103,7 @@
       "noise_seed": 451721
     },
     "_meta": {
-      "title": "8 · Seed"
+      "title": "8 \u00b7 Seed"
     }
   },
   "10": {
@@ -197,7 +197,7 @@
       "filename_prefix": "JigaSwagPuzzle/GameArt_Final/Text_to_Asset/Asset"
     },
     "_meta": {
-      "title": "9 · Сохранить PNG"
+      "title": "9 \u00b7 \u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c PNG"
     }
   },
   "20": {
@@ -206,7 +206,7 @@
       "value": "A single wide horizontal mobile game menu button. A deep emerald-green uninterrupted face, thin warm ivory rim and muted gold border. Long rounded rectangle about four times wider than tall. Front view, centered with generous margin. No text, icon or ornaments."
     },
     "_meta": {
-      "title": "1 · Что создать"
+      "title": "1 \u00b7 \u0427\u0442\u043e \u0441\u043e\u0437\u0434\u0430\u0442\u044c"
     }
   },
   "21": {
@@ -215,7 +215,7 @@
       "value": "Premium illustrated casual puzzle-adventure UI. Clean silhouette, soft painted gradients, a shallow bevel and restrained color. Isolated on a flat neutral background."
     },
     "_meta": {
-      "title": "2 · Стиль"
+      "title": "2 \u00b7 \u0421\u0442\u0438\u043b\u044c"
     }
   },
   "22": {
@@ -224,7 +224,7 @@
       "value": true
     },
     "_meta": {
-      "title": "3 · Убрать фон → PNG с альфой"
+      "title": "3 \u00b7 \u0423\u0431\u0440\u0430\u0442\u044c \u0444\u043e\u043d \u2192 PNG \u0441 \u0430\u043b\u044c\u0444\u043e\u0439"
     }
   },
   "23": {
@@ -233,7 +233,7 @@
       "value": false
     },
     "_meta": {
-      "title": "4 · Добавить тень"
+      "title": "4 \u00b7 \u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0442\u0435\u043d\u044c"
     }
   },
   "24": {
@@ -242,7 +242,7 @@
       "value": true
     },
     "_meta": {
-      "title": "5 · Добавить блики"
+      "title": "5 \u00b7 \u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0431\u043b\u0438\u043a\u0438"
     }
   },
   "25": {
@@ -251,7 +251,7 @@
       "value": "No cast shadow. No contact shadow. Use even diffuse shading."
     },
     "_meta": {
-      "title": "Инструкция для промпта"
+      "title": "\u0418\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u044f \u0434\u043b\u044f \u043f\u0440\u043e\u043c\u043f\u0442\u0430"
     }
   },
   "26": {
@@ -260,7 +260,7 @@
       "value": "Add a small soft contact shadow directly beneath the object, no dramatic lighting."
     },
     "_meta": {
-      "title": "Инструкция для промпта"
+      "title": "\u0418\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u044f \u0434\u043b\u044f \u043f\u0440\u043e\u043c\u043f\u0442\u0430"
     }
   },
   "27": {
@@ -269,7 +269,7 @@
       "value": "Matte surface. No specular highlight or gleam."
     },
     "_meta": {
-      "title": "Инструкция для промпта"
+      "title": "\u0418\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u044f \u0434\u043b\u044f \u043f\u0440\u043e\u043c\u043f\u0442\u0430"
     }
   },
   "28": {
@@ -278,7 +278,7 @@
       "value": "Add a restrained thin edge highlight and a small controlled specular gleam."
     },
     "_meta": {
-      "title": "Инструкция для промпта"
+      "title": "\u0418\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u044f \u0434\u043b\u044f \u043f\u0440\u043e\u043c\u043f\u0442\u0430"
     }
   },
   "29": {
@@ -298,7 +298,7 @@
       ]
     },
     "_meta": {
-      "title": "Тень: текст"
+      "title": "\u0422\u0435\u043d\u044c: \u0442\u0435\u043a\u0441\u0442"
     }
   },
   "30": {
@@ -318,7 +318,7 @@
       ]
     },
     "_meta": {
-      "title": "Блики: текст"
+      "title": "\u0411\u043b\u0438\u043a\u0438: \u0442\u0435\u043a\u0441\u0442"
     }
   },
   "31": {
@@ -335,7 +335,7 @@
       "delimiter": "\n"
     },
     "_meta": {
-      "title": "Собрать промпт"
+      "title": "\u0421\u043e\u0431\u0440\u0430\u0442\u044c \u043f\u0440\u043e\u043c\u043f\u0442"
     }
   },
   "32": {
@@ -352,7 +352,7 @@
       "delimiter": "\n"
     },
     "_meta": {
-      "title": "Собрать промпт"
+      "title": "\u0421\u043e\u0431\u0440\u0430\u0442\u044c \u043f\u0440\u043e\u043c\u043f\u0442"
     }
   },
   "33": {
@@ -369,7 +369,7 @@
       "delimiter": "\n"
     },
     "_meta": {
-      "title": "Собрать промпт"
+      "title": "\u0421\u043e\u0431\u0440\u0430\u0442\u044c \u043f\u0440\u043e\u043c\u043f\u0442"
     }
   },
   "34": {
@@ -394,7 +394,7 @@
       ]
     },
     "_meta": {
-      "title": "Выделить предмет"
+      "title": "\u0412\u044b\u0434\u0435\u043b\u0438\u0442\u044c \u043f\u0440\u0435\u0434\u043c\u0435\u0442"
     }
   },
   "36": {
@@ -406,23 +406,23 @@
       ]
     },
     "_meta": {
-      "title": "Маска прозрачности"
+      "title": "\u041c\u0430\u0441\u043a\u0430 \u043f\u0440\u043e\u0437\u0440\u0430\u0447\u043d\u043e\u0441\u0442\u0438"
     }
   },
   "37": {
     "class_type": "JoinImageWithAlpha",
     "inputs": {
       "image": [
-        "13",
+        "39",
         0
       ],
       "alpha": [
-        "36",
-        0
+        "39",
+        1
       ]
     },
     "_meta": {
-      "title": "Добавить альфа-канал"
+      "title": "\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0430\u043b\u044c\u0444\u0430-\u043a\u0430\u043d\u0430\u043b"
     }
   },
   "38": {
@@ -442,7 +442,30 @@
       ]
     },
     "_meta": {
-      "title": "Выход RGB или RGBA"
+      "title": "\u0412\u044b\u0445\u043e\u0434 RGB \u0438\u043b\u0438 RGBA"
+    }
+  },
+  "39": {
+    "class_type": "GameArtCutoutFinish",
+    "inputs": {
+      "image": [
+        "13",
+        0
+      ],
+      "alpha": [
+        "36",
+        0
+      ],
+      "mode": "alpha_only",
+      "blackpoint": 0.01,
+      "whitepoint": 0.99,
+      "max_iterations": 1000,
+      "outer_margin": 2,
+      "edge_width": 1,
+      "min_component_fraction": 0.0
+    },
+    "_meta": {
+      "title": "Cutout finish - alpha refinement"
     }
   }
 }

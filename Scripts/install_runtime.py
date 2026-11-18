@@ -27,6 +27,37 @@ def sync_library(root):
     return {'copied': copied, 'preserved': preserved}
 
 
+def install_custom_nodes(root, runtime):
+    destination = root / 'ComfyUI/custom_nodes'
+    destination.mkdir(parents=True, exist_ok=True)
+    for pack in runtime['custom_node_packs']:
+        name = pack['name']
+        if Path(name).name != name or name in ('.', '..'):
+            raise ValueError('Custom node name must be a single directory name')
+        target = destination / name
+        if pack['source'] == 'bundled':
+            source = root / 'CustomNodes' / name
+            paths = [p for p in source.rglob('*') if p.is_file() and '__pycache__' not in p.parts]
+            if not paths:
+                raise RuntimeError(f'Missing bundled custom node: {name}')
+            for path in paths:
+                existing = target / path.relative_to(source)
+                if existing.exists() and existing.read_bytes() != path.read_bytes():
+                    raise RuntimeError(f'Existing custom node differs; back it up and update deliberately: {existing}')
+            for path in paths:
+                existing = target / path.relative_to(source)
+                existing.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(path, existing)
+        else:
+            if not target.exists():
+                run('git', 'clone', '--no-checkout', pack['repository'], target)
+                run('git', '-C', target, 'checkout', '--detach', pack['commit'])
+            actual = subprocess.check_output(['git','-C',str(target),'rev-parse','HEAD'],text=True).strip()
+            if actual != pack['commit'] or subprocess.check_output(['git','-C',str(target),'diff','HEAD','--name-only'],text=True).strip():
+                raise RuntimeError(f'Existing custom node differs from its pin; preserving it: {name}')
+    print('Custom nodes installed from pinned source; dependencies use the application lock.')
+
+
 def create_mcp_config(root):
     profile = root / 'Tools/ComfyMCP_Profile'
     config_path = profile / 'AppData/Local/comfy-cli/config.ini'
@@ -114,6 +145,7 @@ def main():
         root / 'Config/mcp.windows.lock.txt')
     run(app_python, '-m', 'pip', 'check')
     run(args.uv, 'pip', 'check', '--python', mcp_python)
+    install_custom_nodes(root, runtime)
     run(app_python, root / 'Scripts/create_demo_inputs.py')
     print('Workflow library:', sync_library(root))
     generated = create_mcp_config(root)

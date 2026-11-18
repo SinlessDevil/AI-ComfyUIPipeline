@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRECTORIES = {'Config','Docs','Examples','Scripts','Tests','Workflows','WorkflowLibrary','skills','.github'}
+DIRECTORIES = {'CustomNodes','Config','Docs','Examples','Scripts','Tests','Workflows','WorkflowLibrary','skills','.github'}
 ROOT_FILES = {'.gitignore','.gitattributes','.env.example','README.md','AGENTS.md','GAME_ART_PIPELINE.md',
               'Install.ps1','INSTALL.bat','START_COMFYUI.bat','OPEN_COMFYUI.bat','STOP_COMFYUI.bat','UPDATE_COMFYUI.bat'}
 EXTENSIONS = {'.py','.json','.md','.yaml','.yml','.ps1','.bat','.txt'}
