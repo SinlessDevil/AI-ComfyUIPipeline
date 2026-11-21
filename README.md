@@ -1,6 +1,6 @@
 # AI ComfyUI Pipeline
 
-Reproducible home for our ComfyUI game-art workflows, local launch tools, MCP connection, sprite edge cleanup, and UI asset skill.
+Reproducible home for our ComfyUI game-art workflows, local launch tools, MCP connection, sprite edge cleanup, the mockup-to-sprites toolkit, and our asset-authoring skills (`unity-ui-assets`, `blender-props`).
 
 ## Install with an agent
 
@@ -63,15 +63,22 @@ Installation writes path-specific snippets to `Logs/generated/mcp.json` and `Log
 
 The wrapper adds `list_local_workflows` and `start_local_pipeline` to the official Comfy MCP server. Use the latter to start this installation with its shared directories. Follow [MCP setup and acceptance checks](Docs/MCP.md).
 
-## Install the bundled skill
+## Install the bundled skills
 
-The complete English skill is in [skills/unity-ui-assets](skills/unity-ui-assets/SKILL.md), copied from our AI-UnityPipeline skill. The command remains `$unity-ui-assets`. It works with PNG exports and ComfyUI without requiring Unity to be installed.
+This repository is the home of our asset-authoring skills. Both are in English and keep their command names.
+
+| Skill | Purpose |
+|---|---|
+| [unity-ui-assets](skills/unity-ui-assets/SKILL.md) | Turn a UI mockup or screenshot into separate PNG sprites through ComfyUI, with review and a Before/After gallery. Works without a Unity installation. |
+| [blender-props](skills/blender-props/SKILL.md) | Create or revise simple 3D props in Blender from references: materials, basic rigs, preview renders, and checked FBX exports for Unity. |
 
 ```text
-Install skills/unity-ui-assets from this repository into my agent's user skills
-directory. If unity-ui-assets is already installed, compare and update that copy;
-keep a single active installation of the skill.
+Install skills/unity-ui-assets and skills/blender-props from this repository into
+my agent's user skills directory. If a skill is already installed, compare and
+update that copy; keep a single active installation of each skill.
 ```
+
+User-level skill folders: Codex `~/.agents/skills/` (older setups `~/.codex/skills/`), Claude Code `~/.claude/skills/`. Copy each complete folder, including `agents/`, `references/` and `scripts/`.
 
 Example request:
 
@@ -95,6 +102,34 @@ Generate the rest through the edit route in batches, up to four attempts each,
 and keep small icons in two sizes.
 ```
 
+## Model 3D props in Blender
+
+`blender-props` drives an existing Blender installation through its built-in Python API (`bpy`); no Blender MCP server, add-on, ComfyUI model, or paid generation service is needed. It needs a local Blender executable with Python support. Verify it with `--version`; an executable absent from PATH may still be installed through Steam or in a custom folder. Do not install or upgrade Blender merely because it is not on PATH; ask for its path instead.
+
+```powershell
+$blenderExe = '<path to blender.exe>'
+& $blenderExe --version
+& $blenderExe --background --python-exit-code 1 --python 'ArtSource/MyProps/build_props.py'
+if ($LASTEXITCODE -ne 0) { throw 'Blender asset build failed' }
+```
+
+The build script is written for the requested asset; `build_props.py` is an example filename, not a bundled generator. The workflow was exercised with Blender 5.2.3 LTS on Windows (a table, a hinged book and a lamp). See [Blender execution and FBX notes](skills/blender-props/references/blender-fbx.md).
+
+Example request:
+
+```text
+Use $blender-props to create a stylized wooden table, an open book with
+blank white pages and a closing rig, and a desk lamp from these references.
+Use this Blender executable: <absolute path to blender.exe>.
+Save editable sources, textures, separate FBX exports, and preview renders
+in ArtSource/DeskProps. Check the open, intermediate, and closed poses.
+Report Blender/FBX verification separately from Unity verification.
+```
+
+Expected deliverables: an editable `.blend` with resolved or packed textures and a reproducible build script where procedural construction fits; separate FBX files with intentional metre scale, pivots and only the required geometry or rig; baked image textures for important procedural materials; inspected previews and, for animated props, documented clips plus bone and shape-key checks after FBX reimport; a short usage note with any remaining Unity import or material setup.
+
+Keep `.blend` sources outside a Unity project's `Assets` for explicit FBX delivery. A correct Blender render or Blender → FBX → Blender check does not establish that materials or animation work in Unity; verify that in the Editor or report it as pending.
+
 ## Repository contents
 
 The maintained 2D graphs include selectable alpha/RGB edge cleanup and a dedicated gold/ivory glyph mode. Retouch preserves source alpha by default. See the [cutout guide](Docs/CUTOUT.md), including upgrade instructions for existing installations.
@@ -105,7 +140,7 @@ The maintained 2D graphs include selectable alpha/RGB edge cleanup and a dedicat
 - `Scripts/`, `Tests/`: launch, model download/verification, smoke test, mask refinement, and tests.
 - `Config/`: pinned runtime, application/MCP package snapshots, and model catalog.
 - `CustomNodes/`: bundled local cutout node; the installer also restores the pinned upstream Image-Filters pack.
-- `skills/`: bundled UI asset skill and gallery builder.
+- `skills/`: bundled `unity-ui-assets` skill with its gallery builder, and the `blender-props` 3D prop skill.
 - `Examples/PuzzleChronicles/`: screen-specific extraction/reconstruction recipes from the existing pipeline.
 - `Examples/PuzzleMemories/`: the 40-task edit-route recipe of an accepted production run.
 - `Docs/`: installation, hardware, models, MCP, workflow guidance, and validation record.

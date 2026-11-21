@@ -26,6 +26,10 @@ With the local toolkit (`Pipelines/UnityUIAssets`), generate UI elements first a
 
 After every full screen breakdown or full production run, provide `Gallery.html` alongside PNGs. Show the source screen and assembled result, then labeled Before/After columns per asset. Use a labeled reference crop when no prior PNG exists. Show transparency, make full images clickable, and verify local links. For mask comparisons apply both masks to the same generation with the same crop, scale, and background. Include the gallery link in the handoff.
 
+## Blender props
+
+Use the bundled `skills/blender-props/SKILL.md` for 3D prop requests. Use the user's existing Blender executable, verify it with `--version`, and do not install or upgrade Blender as a side effect. Report Blender source/render checks, the FBX round trip, and Unity import verification separately.
+
 ## Maintenance
 
 Keep documentation in English. Runtime and model upgrades are deliberate changes; update lock files and validate affected workflows together. Before publishing, inspect the explicit file list and run `Scripts/validate_repository.py`. Do not commit weights, environments, caches, credentials, personal paths, or generated packs. Preserve separate user-modified UI graphs when synchronizing the library.

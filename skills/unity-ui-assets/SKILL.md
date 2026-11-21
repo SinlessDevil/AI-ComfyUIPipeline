@@ -5,7 +5,7 @@ description: Extract and reconstruct reference-faithful layered Unity PNG sprite
 
 # Unity UI Assets
 
-This copy is maintained in AI-ComfyUIPipeline. It originated in AI-UnityPipeline. Keep the existing skill name when installing; use one active copy per agent. The workflow uses ComfyUI for image generation and exports PNGs without requiring a Unity installation.
+This skill is maintained in AI-ComfyUIPipeline; it originated in AI-UnityPipeline, which no longer ships it. Keep the existing skill name when installing; use one active copy per agent. The workflow uses ComfyUI for image generation and exports PNGs without requiring a Unity installation.
 
 Turn the user's UI reference into independently usable sprites while preserving its visual identity. A valid PNG or a completed generation is not evidence of reference fidelity. If the user requests a breakdown first, deliver that breakdown before production.
 
