@@ -1,0 +1,316 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-4b-fp8.safetensors",
+      "weight_dtype": "default"
+    },
+    "_meta": {
+      "title": "Existing local editing model"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen_3_4b_fp4_flux2.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "_meta": {
+      "title": "Compatible encoder"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    },
+    "_meta": {
+      "title": "Compatible VAE"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "Remove only PLAY lettering and the triangular play icon from this exact button. Reconstruct the same warm emerald-green face under them, retaining its original subtle gradient and illustrated shading. Preserve the exact gold rim, original button silhouette, existing restrained bevel highlights, colors and camera. No new white reflection, darker lower band, letters, symbols, ornaments or exterior shadow. This is localized cleanup of the supplied image, not a new button design.",
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Asset-specific edit; no blanket material preset"
+    }
+  },
+  "8": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": [
+        "22",
+        0
+      ],
+      "height": [
+        "22",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Distilled sampling schedule"
+    }
+  },
+  "9": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 202611201
+    },
+    "_meta": {
+      "title": "Recorded seed"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "_meta": {
+      "title": "Model sampler"
+    }
+  },
+  "11": {
+    "class_type": "BasicGuider",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "conditioning": [
+        "18",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Reference guidance"
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "9",
+        0
+      ],
+      "guider": [
+        "11",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "8",
+        0
+      ],
+      "latent_image": [
+        "23",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Masked local reconstruction"
+    }
+  },
+  "13": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Raw edited RGB"
+    }
+  },
+  "15": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "29",
+        0
+      ],
+      "filename_prefix": "UIAssets/Manual/play_base/candidate"
+    },
+    "_meta": {
+      "title": "Native composite; visual review still required"
+    }
+  },
+  "16": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "UIAssets_puzzle_memories_pilot_play_base_mwowlukm_source.png"
+    },
+    "_meta": {
+      "title": "Immutable original crop"
+    }
+  },
+  "17": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "21",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Encode reference"
+    }
+  },
+  "18": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "4",
+        0
+      ],
+      "latent": [
+        "17",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Reference-conditioned generation"
+    }
+  },
+  "20": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "UIAssets_puzzle_memories_pilot_play_base_mwowlukm_edit.png"
+    },
+    "_meta": {
+      "title": "Edit mask: TRANSPARENT means editable"
+    }
+  },
+  "21": {
+    "class_type": "ImageScaleToTotalPixels",
+    "inputs": {
+      "image": [
+        "16",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "megapixels": 0.65,
+      "resolution_steps": 32
+    },
+    "_meta": {
+      "title": "Model reference size; export stays native"
+    }
+  },
+  "22": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "21",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Model canvas"
+    }
+  },
+  "23": {
+    "class_type": "SetLatentNoiseMask",
+    "inputs": {
+      "samples": [
+        "17",
+        0
+      ],
+      "mask": [
+        "20",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Noise only in the intended region"
+    }
+  },
+  "24": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "UIAssets_puzzle_memories_pilot_play_base_mwowlukm_blend.png"
+    },
+    "_meta": {
+      "title": "Prepared native-size feathered edit mask"
+    }
+  },
+  "25": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "UIAssets_puzzle_memories_pilot_play_base_mwowlukm_contour.png"
+    },
+    "_meta": {
+      "title": "Native export silhouette"
+    }
+  },
+  "28": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "16",
+        0
+      ],
+      "source": [
+        "13",
+        0
+      ],
+      "x": 0,
+      "y": 0,
+      "resize_source": true,
+      "mask": [
+        "24",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Restore original outside local repair"
+    }
+  },
+  "29": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "28",
+        0
+      ],
+      "alpha": [
+        "25",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Local composite + traced contour"
+    }
+  },
+  "30": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ],
+      "filename_prefix": "UIAssets/Manual/play_base/raw_edit"
+    },
+    "_meta": {
+      "title": "Diagnostic model output"
+    }
+  }
+}

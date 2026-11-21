@@ -190,6 +190,15 @@
       "klein_vae",
       "birefnet"
     ],
+    "uiassets": [
+      "klein",
+      "klein_encoder",
+      "klein_vae",
+      "birefnet",
+      "qwen_edit",
+      "qwen_encoder",
+      "qwen_vae"
+    ],
     "zimage": [
       "zimage",
       "zimage_encoder",

@@ -1,0 +1,303 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-4b-fp8.safetensors",
+      "weight_dtype": "default"
+    },
+    "_meta": {
+      "title": "Existing local editing model"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen_3_4b_fp4_flux2.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "_meta": {
+      "title": "Compatible encoder"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    },
+    "_meta": {
+      "title": "Compatible VAE"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "Reconstruct only the complete open green hardcover shell of this exact book, removing every paper page and its thickness. Retain the broad open-book pose, slanted outer sides, four warm gold corner protectors, narrow green rails, lower curved spine and reference camera. Expose coherent nearly smooth painted green binding across both halves with fine restrained texture matching the original visible cover. No paper, page ornaments, logo, text, buttons, bookmarks, portrait, counters, scene or table. Complete isolated empty open binding centered on uniform neutral gray. No new white glossy spots, photographic leather, coarse grain, filigree or external cast shadow.",
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Asset-specific edit; no blanket material preset"
+    }
+  },
+  "7": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "width": 1216,
+      "height": 912,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Whole-object candidate canvas"
+    }
+  },
+  "8": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1216,
+      "height": 912
+    },
+    "_meta": {
+      "title": "Distilled sampling schedule"
+    }
+  },
+  "9": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 202611202
+    },
+    "_meta": {
+      "title": "Recorded seed"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "_meta": {
+      "title": "Model sampler"
+    }
+  },
+  "11": {
+    "class_type": "BasicGuider",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "conditioning": [
+        "18",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Reference guidance"
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "9",
+        0
+      ],
+      "guider": [
+        "11",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "8",
+        0
+      ],
+      "latent_image": [
+        "7",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Reconstruct coherent hidden structure"
+    }
+  },
+  "13": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "New object RGB"
+    }
+  },
+  "15": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "38",
+        0
+      ],
+      "filename_prefix": "UIAssets/Manual/book_cover/candidate"
+    },
+    "_meta": {
+      "title": "Candidate; never automatic READY"
+    }
+  },
+  "16": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "UIAssets_puzzle_memories_pilot_book_cover_mwowlukm_source.png"
+    },
+    "_meta": {
+      "title": "Immutable original crop"
+    }
+  },
+  "17": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "21",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Encode reference"
+    }
+  },
+  "18": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "4",
+        0
+      ],
+      "latent": [
+        "17",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Reference-conditioned generation"
+    }
+  },
+  "21": {
+    "class_type": "ImageScaleToTotalPixels",
+    "inputs": {
+      "image": [
+        "16",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "megapixels": 1.1,
+      "resolution_steps": 32
+    },
+    "_meta": {
+      "title": "Model reference size; export stays native"
+    }
+  },
+  "34": {
+    "class_type": "LoadBackgroundRemovalModel",
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    },
+    "_meta": {
+      "title": "Foreground model"
+    }
+  },
+  "35": {
+    "class_type": "RemoveBackground",
+    "inputs": {
+      "bg_removal_model": [
+        "34",
+        0
+      ],
+      "image": [
+        "13",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Estimate generated object foreground"
+    }
+  },
+  "36": {
+    "class_type": "InvertMask",
+    "inputs": {
+      "mask": [
+        "35",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Comfy transparency mask"
+    }
+  },
+  "37": {
+    "class_type": "GameArtCutoutFinish",
+    "inputs": {
+      "image": [
+        "13",
+        0
+      ],
+      "alpha": [
+        "36",
+        0
+      ],
+      "mode": "alpha_only",
+      "blackpoint": 0.01,
+      "whitepoint": 0.99,
+      "max_iterations": 1000,
+      "outer_margin": 2,
+      "edge_width": 1,
+      "min_component_fraction": 0
+    },
+    "_meta": {
+      "title": "Alpha refinement; inspect dark rim and holes"
+    }
+  },
+  "38": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "37",
+        0
+      ],
+      "alpha": [
+        "37",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Generated whole-object candidate"
+    }
+  },
+  "42": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ],
+      "filename_prefix": "UIAssets/Manual/book_cover/raw_rgb"
+    },
+    "_meta": {
+      "title": "Diagnostic pre-cutout RGB"
+    }
+  }
+}

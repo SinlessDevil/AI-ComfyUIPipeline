@@ -41,6 +41,7 @@ Exact files, fixed revisions, download URLs, sizes, and SHA256 values are record
 | Profile | Purpose |
 |---|---|
 | `ui` | Main FLUX.2 Klein + BiRefNet workflow, recommended starting profile for the reference machine |
+| `uiassets` | `ui` plus Qwen Image Edit 2511 with its encoder and VAE: everything the mockup-to-sprites toolkit uses, about 26.7 GB |
 | `starter` | Original SD 1.5 examples + BiRefNet |
 | `zimage` | Z-Image comparison graphs + BiRefNet |
 | `qwen` | Qwen generation and editing + shared encoder/VAE + BiRefNet |
@@ -81,17 +82,32 @@ allow up to three retries per asset. Save PNGs, the assembled screen, manifest,
 QA report, and a Before/After Gallery.html in the output folder I provide.
 ```
 
+## Turn a mockup into sprites
+
+[Pipelines/UnityUIAssets](Pipelines/UnityUIAssets/README.md) is the toolkit the skill drives on this installation. Its default edit route image-edits each element's mockup crop with Qwen Image Edit 2511 onto flat gray, keys the background with its own matting, matches colour to the reference, and keeps small assets in two sizes (exact runtime PNG plus a high-resolution master). Jobs go to the queue as a batch; every attempt keeps its graph, seed, prompt ID, raw and final image; the user accepts each sprite on a review page before it counts as ready. Install the `uiassets` profile for it, then see [the game-art guide](GAME_ART_PIPELINE.md#mockup-to-sprites) and the worked [Puzzle Memories recipe](Examples/PuzzleMemories/README.md).
+
+Example request:
+
+```text
+Use $unity-ui-assets with the local toolkit to turn the rejected sprites of this pack
+into clean candidates. Sort what is already good first and give me a review page.
+Generate the rest through the edit route in batches, up to four attempts each,
+and keep small icons in two sizes.
+```
+
 ## Repository contents
 
 The maintained 2D graphs include selectable alpha/RGB edge cleanup and a dedicated gold/ivory glyph mode. Retouch preserves source alpha by default. See the [cutout guide](Docs/CUTOUT.md), including upgrade instructions for existing installations.
 
-- `Workflows/`: maintained UI graphs and backend API forms.
-- `WorkflowLibrary/`: snapshot of interface-visible Starter, GameArt, and 3D graphs. Installation copies missing files into the local UI library and preserves existing ones.
+- `Workflows/`: maintained UI graphs and backend API forms, including the three `UIAssets` source-extraction, masked-repair and rebuild graphs.
+- `WorkflowLibrary/`: snapshot of interface-visible Starter, GameArt, UIAssets, and 3D graphs. Installation copies missing files into the local UI library and preserves existing ones.
+- `Pipelines/UnityUIAssets/`: mockup-to-sprites toolkit — edit route, prepare/export/review CLI, shared config. Its `runs/` folders stay local.
 - `Scripts/`, `Tests/`: launch, model download/verification, smoke test, mask refinement, and tests.
 - `Config/`: pinned runtime, application/MCP package snapshots, and model catalog.
 - `CustomNodes/`: bundled local cutout node; the installer also restores the pinned upstream Image-Filters pack.
 - `skills/`: bundled UI asset skill and gallery builder.
 - `Examples/PuzzleChronicles/`: screen-specific extraction/reconstruction recipes from the existing pipeline.
+- `Examples/PuzzleMemories/`: the 40-task edit-route recipe of an accepted production run.
 - `Docs/`: installation, hardware, models, MCP, workflow guidance, and validation record.
 
 ComfyUI itself, Python environments, downloaded models, credentials, user state, reference art, generated images, and caches stay local. The repository is a reconstruction recipe; maintain separate backups of valuable artwork.

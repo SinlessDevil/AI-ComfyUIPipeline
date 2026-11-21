@@ -5,10 +5,11 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRECTORIES = {'CustomNodes','Config','Docs','Examples','Scripts','Tests','Workflows','WorkflowLibrary','skills','.github'}
+DIRECTORIES = {'CustomNodes','Config','Docs','Examples','Pipelines','Scripts','Tests','Workflows','WorkflowLibrary','skills','.github'}
 ROOT_FILES = {'.gitignore','.gitattributes','.env.example','README.md','AGENTS.md','GAME_ART_PIPELINE.md',
               'Install.ps1','INSTALL.bat','START_COMFYUI.bat','OPEN_COMFYUI.bat','STOP_COMFYUI.bat','UPDATE_COMFYUI.bat'}
-EXTENSIONS = {'.py','.json','.md','.yaml','.yml','.ps1','.bat','.txt'}
+EXTENSIONS = {'.py','.json','.md','.yaml','.yml','.ps1','.bat','.txt','.cjs','.cs'}
+RUNTIME_PARTS = {'runs','History','__pycache__'}
 
 
 def files():
@@ -21,7 +22,7 @@ def files():
         folder = ROOT / name
         if folder.exists():
             for path in folder.rglob('*'):
-                if path.is_file() and '__pycache__' not in path.parts:
+                if path.is_file() and not RUNTIME_PARTS.intersection(path.relative_to(ROOT).parts):
                     result.append(path)
     return sorted(set(result))
 

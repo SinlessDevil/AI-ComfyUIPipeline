@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "project_id": "puzzle_memories_pilot",
+  "language": "ru",
+  "purpose": "Calibration of extraction, local repair and whole-object reconstruction; not a complete UI pack",
+  "source": "../../../Input/01-home.png",
+  "assets": [
+    {
+      "id": "map_badge",
+      "route": "extract",
+      "crop": [768, 235, 894, 361],
+      "outline": "E 769 236 124 124",
+      "alpha_source": "contour",
+      "review_criteria": ["Original gold/green colors retained", "Complete circular silhouette", "Pin interior remains part of the opaque green badge"]
+    },
+    {
+      "id": "map_decoration",
+      "route": "extract",
+      "crop": [1054, 233, 1253, 371],
+      "alpha_source": "automatic",
+      "finish_mode": "alpha_only",
+      "review_criteria": ["Pale path and red flag retained", "Cream page background removed", "No darkening or new gloss"]
+    },
+    {
+      "id": "play_base",
+      "route": "repair",
+      "crop": [176, 732, 646, 909],
+      "outline": "M 270 740 L 555 740 C 606 740 639 775 639 820 C 639 871 606 900 554 900 L 269 900 C 218 900 183 869 183 821 C 183 774 218 740 270 740 Z",
+      "repair": "R 264 766 233 82 R 500 768 68 87",
+      "feather_px": 3,
+      "seed": 202611201,
+      "prompt": "Remove only PLAY lettering and the triangular play icon from this exact button. Reconstruct the same warm emerald-green face under them, retaining its original subtle gradient and illustrated shading. Preserve the exact gold rim, original button silhouette, existing restrained bevel highlights, colors and camera. No new white reflection, darker lower band, letters, symbols, ornaments or exterior shadow. This is localized cleanup of the supplied image, not a new button design.",
+      "review_criteria": ["All lettering and triangle absent", "Original rim and silhouette unchanged", "Green gradient continuous without new glare or dark band"]
+    },
+    {
+      "id": "book_cover",
+      "route": "rebuild",
+      "crop": [0, 0, 1448, 1086],
+      "alpha_source": "automatic",
+      "reference_megapixels": 1.1,
+      "seed": 202611202,
+      "prompt": "Reconstruct only the complete open green hardcover shell of this exact book, removing every paper page and its thickness. Retain the broad open-book pose, slanted outer sides, four warm gold corner protectors, narrow green rails, lower curved spine and reference camera. Expose coherent nearly smooth painted green binding across both halves with fine restrained texture matching the original visible cover. No paper, page ornaments, logo, text, buttons, bookmarks, portrait, counters, scene or table. Complete isolated empty open binding centered on uniform neutral gray. No new white glossy spots, photographic leather, coarse grain, filigree or external cast shadow.",
+      "review_criteria": ["All paper and UI absent", "Visible corners and silhouette match the reference", "One coherent green material and central hinge", "No coarse leather grain or new ornaments"]
+    }
+  ]
+}

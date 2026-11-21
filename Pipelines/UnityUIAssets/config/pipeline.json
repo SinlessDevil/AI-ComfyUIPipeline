@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "name": "Unity UI Assets",
+  "models": {
+    "diffusion": "flux-2-klein-4b-fp8.safetensors",
+    "encoder": "qwen_3_4b_fp4_flux2.safetensors",
+    "vae": "flux2-vae.safetensors",
+    "background_removal": "birefnet.safetensors"
+  },
+  "defaults": {
+    "steps": 4,
+    "reference_megapixels": 0.65,
+    "generation_megapixels": 1.1,
+    "padding": 4,
+    "feather_px": 3,
+    "finish_mode": "off",
+    "max_retries": 3
+  },
+  "edit_route": {
+    "proven": "2026-11-21, Puzzle Memories V6, runs/puzzle-v6-fix-01",
+    "editor": {"diffusion": "qwen_image_edit_2511_nvfp4.safetensors", "encoder": "qwen_2.5_vl_7b_nvfp4.safetensors",
+               "vae": "qwen_image_vae.safetensors", "steps": 30, "cfg": 4.0, "shift": 3.1, "megapixels": 1.0},
+    "background": "flat gray #c8c8c8, removed by edit/key_bg.py (not BiRefNet)",
+    "small_assets": {"hires_below_px": 128, "hires_min_long_side_px": 256, "hires_min_scale": 4,
+                     "export": ["exact-size runtime PNG", "high-resolution master"]},
+    "batch_submit": true,
+    "max_attempts": 4
+  },
+  "treatment_priority": {
+    "changed": "2026-11-21",
+    "default": "GENERATE",
+    "order": ["GENERATE", "EXTRACT", "RECONSTRUCT", "LIVE_UI"],
+    "generate": "image-edit each UI element from its mockup crop (edit/ route), optionally siblings in one sheet",
+    "extract": "only fully visible content-specific illustration: chapter maps, museum paintings, scene art",
+    "reconstruct": "simple stretchable surfaces as 9-slice",
+    "switch_to_generate_after_failed_cut_retries": 1
+  },
+  "fidelity": {
+    "target": "Clean sprites that look like the original mockup once reassembled; approximately 95% as a qualitative goal",
+    "percentage_metric_defined": false,
+    "preserve_source_pixels": "extracted_illustration_only",
+    "require_explicit_visual_review": true,
+    "automatic_ready": false,
+    "comparison_reference": "immutable_original"
+  }
+}

@@ -1,0 +1,15 @@
+# Configured local Comfy toolkit
+
+The reusable toolkit ships with the AI-ComfyUIPipeline repository at `Pipelines/UnityUIAssets` under the ComfyUI installation root (the folder that holds `ComfyUI/`, `Models/`, `Workflows/`). Find the actual root on the user's machine, read the toolkit's `README.md` and inspect the live `config/pipeline.json` before running. Do not assume the path or installed models exist on another machine: the edit route needs the `qwen_edit`, `qwen_encoder` and `qwen_vae` models (`uiassets` or `qwen` model profile), the other routes the `ui` profile.
+
+**Edit route (default since 2026-11-21).** The tools in `edit/` implement the proven algorithm from SKILL.md: `comfy_run.py` (Qwen Image Edit 2511 graph, batch submission, gray keying, colour match, hi-res masters for assets under 128 px), `reprocess.py` (re-key without GPU), `reconstruct_plate.py`, `outline_glyph.py`, `merge_double_stroke.py`, `fit_alpha.py`, `make_review.py` + `review_sheet.ps1`. Read `edit/README.md` for the run folder layout (`run.json`, `tasks.json`, `Attempts/`, `selection.json`). A complete 40-task recipe from the accepted Puzzle Memories V6 run is in the repository's `Examples/PuzzleMemories/`; reuse its prompt patterns, not its crops.
+
+Common scripts for the older routes live in `scripts/`; project-specific crops, contours, repair regions, prompts and review criteria live in `projects/*.json`. Start a new folder under `runs/` for each attempt (run folders are local and ignored by Git). Keep accepted exports and their acceptance records unchanged; list only failing IDs in retry recipes.
+
+`pipeline.ps1` prepares crops/masks/API graphs, exports source-preserving composites, records explicit visual decisions and builds the gallery. Backend upload, validation, asynchronous submission, collection and treatment decisions remain agent responsibilities through the available Comfy MCP tools. The CLI is not an automatic screen-understanding or self-review system. Use it for contour extraction and masked repair.
+
+Route priority (2026-11-21): generate UI elements in isolation first — the edit route, or `03_Rebuild_Object`, `GameArt_UI_Asset_Extract` / `GameArt_Style_Final` with the mockup crop as reference, grouping sibling elements into one sheet where the backend allows it. Use `01_Extract_Source` and `02_Repair_Masked` for unoccluded content-specific illustration (maps, paintings) and small overlay repairs. See the toolkit README's route priority.
+
+The browser's `UIAssets` folder contains three local workflows: source extraction, masked repair, and coherent whole-object reconstruction. The older `GameArt_UI_Asset_Extract` synthesizes candidates; inspect actual graph behavior rather than inferring pixel preservation from its name. A passing PNG export is not visual acceptance. Use the documented SHA-bound review gate and do not convert the qualitative fidelity target into a claimed percentage.
+
+The toolkit's 2026-11-20 pilot documents failures as well as a successful source cutout. It is a calibration example, not a replacement for the user's accepted production assets.

@@ -1,0 +1,738 @@
+[
+ {
+  "id": "icon_music",
+  "class": "glyph",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   166,
+   517,
+   65,
+   67
+  ],
+  "size": [
+   768,
+   768
+  ],
+  "subject": "the brown music note icon (two beamed eighth notes)",
+  "geometry": "Two eighth notes joined by a thick beam. The note heads, stems AND the beam are all the same solid dark chocolate brown; no light or cream parts. Only the brown glyph, no plate behind it.",
+  "engine": "qwen",
+  "target": [
+   65,
+   67
+  ],
+  "match": "flat"
+ },
+ {
+  "id": "settings_gear",
+  "class": "glyph",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   66,
+   297,
+   54,
+   54
+  ],
+  "size": [
+   768,
+   768
+  ],
+  "subject": "the green settings gear icon",
+  "geometry": "A cog wheel with eight rounded teeth and a large round hole in the centre, uniformly saturated grass green like the crop, evenly lit, no dark brown corner. No plate behind it.",
+  "engine": "qwen",
+  "target": [
+   54,
+   54
+  ],
+  "match": true
+ },
+ {
+  "id": "home_button",
+  "class": "badge",
+  "ref": "Screens/01-map-chapters-1-2.png",
+  "crop": [
+   152,
+   167,
+   110,
+   112
+  ],
+  "size": [
+   768,
+   768
+  ],
+  "subject": "the round home button",
+  "geometry": "A perfect circle: thick bright orange-yellow gold outer rim (#f2b21c with #ffd75a highlight and #c97a0c shade), bright grass-green enamel disc inside (#3f9a1c centre, #2d7a12 edge, light #6cc03a upper-left), a cream house glyph (#fbe7bf) with pitched roof and door opening centred on the green. Front view, no plate behind.",
+  "engine": "qwen",
+  "target": [
+   110,
+   112
+  ]
+ },
+ {
+  "id": "currency_counter",
+  "class": "plate",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   809,
+   37,
+   256,
+   70
+  ],
+  "size": [
+   1024,
+   288
+  ],
+  "subject": "the empty currency counter plate behind the gem and coin amounts",
+  "geometry": "One long slim horizontal rounded pill (stadium shape) that fills about 90 percent of the image width, in warm dark brown (#5b3a21, slightly lighter top #6e4a2c), with a thin light cream outline rim (#f6e3bd). Completely empty: no gem, no coin, no plus button, no numbers. Front view.",
+  "engine": "qwen",
+  "target": [
+   256,
+   70
+  ]
+ },
+ {
+  "id": "icon_hints",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   542,
+   613,
+   88,
+   86
+  ],
+  "subject": "the brown pictogram icon in the centre of the crop (a light bulb)",
+  "geometry": "Keep exactly the same pictogram shape, colors and painted shading as in the crop. Only the brown glyph, no plate, no circle behind it.",
+  "target": [
+   80,
+   78
+  ],
+  "match": "flat"
+ },
+ {
+  "id": "icon_language",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   542,
+   514,
+   80,
+   78
+  ],
+  "subject": "the brown pictogram icon in the centre of the crop (a globe)",
+  "geometry": "Keep exactly the same pictogram shape, colors and painted shading as in the crop. Only the brown glyph, no plate, no circle behind it.",
+  "target": [
+   72,
+   70
+  ],
+  "match": "flat"
+ },
+ {
+  "id": "icon_privacy",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   990,
+   609,
+   84,
+   84
+  ],
+  "subject": "the brown pictogram icon in the centre of the crop",
+  "geometry": "Keep exactly the same pictogram shape, colors and painted shading as in the crop. Only the brown glyph, no plate, no circle behind it.",
+  "target": [
+   76,
+   76
+  ],
+  "match": "flat"
+ },
+ {
+  "id": "icon_restore",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   989,
+   717,
+   86,
+   78
+  ],
+  "subject": "the brown pictogram icon in the centre of the crop",
+  "geometry": "Keep exactly the same pictogram shape, colors and painted shading as in the crop. Only the brown glyph, no plate, no circle behind it.",
+  "target": [
+   78,
+   70
+  ],
+  "match": "flat"
+ },
+ {
+  "id": "icon_sound",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   158,
+   618,
+   80,
+   72
+  ],
+  "subject": "the brown pictogram icon in the centre of the crop (a speaker)",
+  "geometry": "Keep exactly the same pictogram shape, colors and painted shading as in the crop. Only the brown glyph, no plate, no circle behind it.",
+  "target": [
+   72,
+   64
+  ],
+  "match": "flat"
+ },
+ {
+  "id": "icon_support",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   990,
+   510,
+   84,
+   78
+  ],
+  "subject": "the brown pictogram icon in the centre of the crop",
+  "geometry": "Keep exactly the same pictogram shape, colors and painted shading as in the crop. Only the brown glyph, no plate, no circle behind it.",
+  "target": [
+   76,
+   70
+  ],
+  "match": "flat"
+ },
+ {
+  "id": "icon_vibration",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   147,
+   719,
+   95,
+   81
+  ],
+  "subject": "the brown pictogram icon in the centre of the crop (a vibrating phone)",
+  "geometry": "A dark brown line-art outline of a smartphone, tilted slightly, with two wavy vibration lines on each side. The screen is empty. Use a MEDIUM-THICK solid stroke, as thick as the lines in the crop (about 1/12 of the phone width), continuous and unbroken. No plate behind it.",
+  "target": [
+   85,
+   71
+  ],
+  "match": "flat"
+ },
+ {
+  "id": "chevron_right",
+  "engine": "qwen",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   1240,
+   273,
+   39,
+   52
+  ],
+  "subject": "the small brown right-pointing chevron arrow",
+  "geometry": "A single thick rounded chevron \">\" in the same brown, nothing else.",
+  "target": [
+   31,
+   44
+  ],
+  "match": true
+ },
+ {
+  "id": "node_check",
+  "engine": "qwen",
+  "ref": "Screens/01-map-chapters-1-2.png",
+  "crop": [
+   0,
+   0,
+   1024,
+   1024
+  ],
+  "subject": "the small check mark glyph of a completed level node",
+  "geometry": "Only the check mark glyph, same color and shading, no circle behind it.",
+  "target": [
+   33,
+   28
+  ],
+  "match": true,
+  "edit": "Remove the gold rim and the green disc completely. Keep only the white check mark with its soft cream bevel, same shape. Place it centered on a plain flat uniform light gray background (#c8c8c8) with empty margin on every side. No text, no shadow on the background.",
+  "ref_abs": "Attempts/completed_badge/a1/raw.png"
+ },
+ {
+  "id": "node_finale_cube",
+  "engine": "qwen",
+  "ref": "Screens/01-map-chapters-1-2.png",
+  "crop": [
+   290,
+   436,
+   42,
+   41
+  ],
+  "subject": "the small 3D cube icon of the final level node",
+  "geometry": "Only the small cube, same colors and shading, no circle behind it.",
+  "target": [
+   34,
+   33
+  ]
+ },
+ {
+  "id": "node_lock",
+  "engine": "qwen",
+  "ref": "Screens/01-map-chapters-1-2.png",
+  "crop": [
+   371,
+   414,
+   34,
+   36
+  ],
+  "subject": "the small padlock glyph of a locked level node",
+  "geometry": "Only the padlock glyph, same colors and shading, no circle behind it.",
+  "target": [
+   26,
+   28
+  ],
+  "match": true
+ },
+ {
+  "id": "progress_track",
+  "engine": "qwen",
+  "ref": "Screens/05-achievements-stickers.png",
+  "crop": [
+   274,
+   711,
+   275,
+   94
+  ],
+  "subject": "the empty progress bar track",
+  "geometry": "The recessed rounded horizontal track only, one continuous even surface from end to end with no vertical line or seam: remove the green fill and any numbers, keep the same tan recess color, rim and rounded ends.",
+  "target": [
+   223,
+   42
+  ]
+ },
+ {
+  "id": "toggle_on_track",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   376,
+   512,
+   142,
+   80
+  ],
+  "subject": "the green toggle switch track",
+  "geometry": "Only the rounded horizontal green pill track of the switch: remove the round knob and complete the track under it. Same green, same rim, smooth gradient.",
+  "target": [
+   124,
+   62
+  ]
+ },
+ {
+  "id": "toggle_off_track",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   376,
+   512,
+   142,
+   80
+  ],
+  "subject": "the green toggle switch track",
+  "geometry": "Only the rounded horizontal green pill track of the switch: remove the round knob and complete the track under it. Same green, same rim, smooth gradient.",
+  "target": [
+   116,
+   54
+  ]
+ },
+ {
+  "id": "toggle_knob",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   447,
+   521,
+   62,
+   62
+  ],
+  "subject": "the round cream knob of the toggle switch",
+  "geometry": "Only the round knob: a perfect smooth circle with a clean even edge, cream face, soft bevel, same colors. No green track around it.",
+  "target": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "category_selected",
+  "engine": "qwen",
+  "ref": "Screens/08-customization-hats.png",
+  "crop": [
+   492,
+   597,
+   230,
+   120
+  ],
+  "subject": "the selected green category pill button",
+  "geometry": "Only the button: same orange-gold rim as the crop and the same deep rich emerald green (#1f7a1f centre, #145c14 lower edge, #3a9a2a top), a smooth clean vertical gradient, no noise texture, no large white glare spot, no text.",
+  "target": [
+   194,
+   84
+  ]
+ },
+ {
+  "id": "achievement_unknown_contour",
+  "engine": "qwen",
+  "ref": "Screens/05-achievements-stickers.png",
+  "crop": [
+   116,
+   632,
+   158,
+   166
+  ],
+  "subject": "the dashed outline of the unknown achievement sticker",
+  "geometry": "The puzzle-piece shaped dashed outline with the same dash color and thickness, including the question/exclamation mark inside it exactly as in the crop.",
+  "target": [
+   134,
+   142
+  ]
+ },
+ {
+  "id": "secret_padlock",
+  "engine": "qwen",
+  "ref": "Screens/05-achievements-stickers.png",
+  "crop": [
+   191,
+   868,
+   64,
+   70
+  ],
+  "subject": "the golden padlock icon",
+  "geometry": "Only the padlock: same gold body, keyhole and shackle; the inside of the shackle is empty background.",
+  "target": [
+   56,
+   62
+  ]
+ },
+ {
+  "id": "profile_placeholder",
+  "engine": "qwen",
+  "ref": "Screens/08-customization-hats.png",
+  "crop": [
+   806,
+   321,
+   69,
+   78
+  ],
+  "subject": "the beige head-and-shoulders silhouette placeholder",
+  "geometry": "Only one clean silhouette, same beige color, no doubled copy, no ring around it.",
+  "target": [
+   61,
+   70
+  ],
+  "key_args": [
+   "--t1",
+   "8",
+   "--t2",
+   "30"
+  ]
+ },
+ {
+  "id": "leaf_olive",
+  "engine": "qwen",
+  "ref": "Screens/02-museum.png",
+  "crop": [
+   263,
+   177,
+   75,
+   74
+  ],
+  "subject": "the small olive leaf sprig ornament",
+  "geometry": "Only the sprig, same leaves, colors and shading.",
+  "target": [
+   67,
+   66
+  ]
+ },
+ {
+  "id": "leaf_green",
+  "engine": "qwen",
+  "ref": "Screens/03-settings.png",
+  "crop": [
+   505,
+   333,
+   105,
+   70
+  ],
+  "subject": "the small green leaf sprig ornament",
+  "geometry": "Only the sprig, same leaves, colors and shading.",
+  "target": [
+   93,
+   58
+  ]
+ },
+ {
+  "id": "coin_icon",
+  "engine": "qwen",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   1083,
+   20,
+   102,
+   106
+  ],
+  "subject": "the gold coin with a puzzle piece emblem",
+  "geometry": "Only the coin, round silhouette with a clean edge, same gold and emblem.",
+  "target": [
+   90,
+   94
+  ]
+ },
+ {
+  "id": "emerald_icon",
+  "engine": "qwen",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   775,
+   28,
+   108,
+   91
+  ],
+  "subject": "the green emerald gem icon",
+  "geometry": "Only the gem, same facets and green; no brown plate behind it.",
+  "target": [
+   96,
+   79
+  ]
+ },
+ {
+  "id": "map_pin",
+  "engine": "qwen",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   791,
+   248,
+   82,
+   99
+  ],
+  "subject": "the gold map location pin icon",
+  "geometry": "Only the pin with its round hole, same gold and shading, nothing behind it.",
+  "target": [
+   72,
+   89
+  ]
+ },
+ {
+  "id": "level_star",
+  "engine": "qwen",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   176,
+   12,
+   115,
+   112
+  ],
+  "subject": "the gold level star",
+  "geometry": "Only the star, same gold, rounded tips, clean edge, no number.",
+  "target": [
+   101,
+   98
+  ]
+ },
+ {
+  "id": "completed_badge",
+  "engine": "qwen",
+  "ref": "Screens/02-museum.png",
+  "crop": [
+   362,
+   439,
+   72,
+   72
+  ],
+  "subject": "the round completed badge",
+  "geometry": "Only the badge: gold rim, green disc, white check mark. Clean circular edge.",
+  "target": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "nav_achievements_badge",
+  "engine": "qwen",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   755,
+   562,
+   160,
+   162
+  ],
+  "subject": "the round achievements badge with a gold trophy",
+  "geometry": "Only the badge: gold rim, green disc, gold trophy in the centre. Clean circular edge.",
+  "target": [
+   138,
+   140
+  ]
+ },
+ {
+  "id": "status_pill",
+  "engine": "qwen",
+  "ref": "Screens/07-customization-avatars.png",
+  "crop": [
+   968,
+   424,
+   240,
+   90
+  ],
+  "subject": "the rounded status pill plate",
+  "geometry": "Only the empty pill plate: same tan color, inset rim and rounded ends; remove the padlock and all text.",
+  "target": [
+   202,
+   52
+  ]
+ },
+ {
+  "id": "puzzle_memories_logo",
+  "engine": "qwen",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   118,
+   85,
+   642,
+   385
+  ],
+  "subject": "the Puzzle Memories game logo",
+  "geometry": "Keep the lettering \"Puzzle Memories\" exactly, the green plate, gold rim and puzzle piece on top. Complete the leaf sprigs on BOTH sides symmetrically.",
+  "target": [
+   526,
+   269
+  ]
+ },
+ {
+  "id": "settings_pull_tab",
+  "engine": "qwen",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   14,
+   274,
+   154,
+   161
+  ],
+  "subject": "the paper pull tab of the book on the left",
+  "geometry": "Only the curled paper tab, empty: remove the gear icon and the word. Same paper color and curl.",
+  "target": [
+   132,
+   139
+  ]
+ },
+ {
+  "id": "art_seaside",
+  "engine": "qwen",
+  "ref": "Screens/02-museum.png",
+  "crop": [
+   184,
+   349,
+   215,
+   109
+  ],
+  "subject": "art_seaside",
+  "geometry": "",
+  "edit": "Show only the painting inside the frame, filling the whole image edge to edge. Remove the gold frame, the green check-mark badge in the bottom-right corner and any label. Keep the painting exactly the same: bell tower with cross, houses, sailboat, sea, clouds and colors.",
+  "target": [
+   223,
+   117
+  ],
+  "mp": 1.2,
+  "fit": "alpha_from",
+  "alpha_from": "Unity/Museum/Art/art_seaside.png"
+ },
+ {
+  "id": "art_seaside_large",
+  "engine": "qwen",
+  "ref": "Screens/02-museum.png",
+  "crop": [
+   773,
+   376,
+   438,
+   311
+  ],
+  "subject": "art_seaside_large",
+  "geometry": "",
+  "edit": "Show only the painting inside the frame, filling the whole image edge to edge. Remove the gold frame and every gold fragment along the edges. Keep the painting exactly the same: bell tower with cross, houses, sailboat, sea, clouds and colors.",
+  "target": [
+   446,
+   319
+  ],
+  "mp": 1.2,
+  "fit": "alpha_from",
+  "alpha_from": "Unity/Museum/Art/art_seaside_large.png"
+ },
+ {
+  "id": "home_puzzle_scene",
+  "engine": "qwen",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   103,
+   372,
+   621,
+   384
+  ],
+  "subject": "home_puzzle_scene",
+  "geometry": "",
+  "edit": "Isolate the large jigsaw-puzzle-piece shaped picture: the seaside town illustration with bell tower, houses and sailboat, surrounded by a thin cream-white border that follows the jigsaw knobs and sockets. Remove the logo plate at the top and everything outside the puzzle piece. Complete the cream border and the picture along the top edge. No ornate frame, no gold, no extra decoration. The puzzle piece fills most of the image. Place it centered on a plain flat uniform light gray background (#c8c8c8) with empty margin on every side. No text, no shadow on the background.",
+  "target": [
+   563,
+   326
+  ],
+  "mp": 1.2
+ },
+ {
+  "id": "museum_large_frame",
+  "engine": "qwen",
+  "ref": "Screens/02-museum.png",
+  "crop": [
+   706,
+   281,
+   569,
+   475
+  ],
+  "subject": "museum_large_frame",
+  "geometry": "",
+  "edit": "Isolate only the large empty ornate gold picture frame with the round puzzle emblem on top. Remove the painting inside, the bookmarks and the trophy on the right. Complete the right side of the frame symmetrically to the left side. The window inside the frame and the area around it are plain flat uniform light gray (#c8c8c8). Keep the same gold color and ornaments. No text.",
+  "target": [
+   517,
+   423
+  ],
+  "mp": 1.2
+ },
+ {
+  "id": "reward_card",
+  "engine": "qwen",
+  "ref": "Screens/05-achievements-stickers.png",
+  "crop": [
+   702,
+   608,
+   567,
+   358
+  ],
+  "subject": "reward_card",
+  "geometry": "",
+  "edit": "Redraw only the empty reward card so that it fills most of the image: a large cream parchment panel with a thin gold rim and rounded corners, and a gold title plate with small laurel sprigs centred on its top edge. Remove ALL text, the progress bar, the hat, the bookmarks on the right and every other element. The title plate is empty. Place it centered on a plain flat uniform light gray background (#c8c8c8) with empty margin on every side. No text, no shadow on the background.",
+  "target": [
+   515,
+   306
+  ],
+  "mp": 1.2
+ },
+ {
+  "id": "nav_map_art",
+  "engine": "qwen",
+  "ref": "Screens/01-home.png",
+  "crop": [
+   1047,
+   226,
+   213,
+   152
+  ],
+  "subject": "nav_map_art",
+  "geometry": "",
+  "edit": "Isolate only the small map illustration: green hill with winding light path, trees, clouds and a red flag. Remove the menu row, text and everything else. Give it a clean soft rounded vignette edge. Keep the same colors. Place it centered on a plain flat uniform light gray background (#c8c8c8) with empty margin on every side. No text, no shadow on the background.",
+  "target": [
+   199,
+   138
+  ],
+  "mp": 1.2
+ }
+]

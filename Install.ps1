@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$Root = $PSScriptRoot,
-    [ValidateSet('starter','ui','zimage','qwen','3d','all')][string]$Profile = 'ui',
+    [ValidateSet('starter','ui','uiassets','zimage','qwen','3d','all')][string]$Profile = 'ui',
     [switch]$Install,
     [switch]$DownloadModels,
     [switch]$DesktopShortcut

@@ -1,0 +1,6 @@
+{
+ "purpose": "Template for a Puzzle Memories edit-route run. Copy this file and tasks.json into Pipelines/UnityUIAssets/runs/<new-run>/, then replace the three paths. Absolute paths, or paths relative to the run folder.",
+ "ref_dir": "REPLACE: folder that contains Screens/*.png (the private mockups)",
+ "baseline_manifest": "REPLACE: manifest.json of the previous pack (V5)",
+ "baseline_root": "REPLACE: root folder of the previous pack (contains Unity/)"
+}

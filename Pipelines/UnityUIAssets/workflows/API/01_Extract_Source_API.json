@@ -1,0 +1,126 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "UIAssets_puzzle_memories_pilot_map_badge_mwowlukm_source.png"
+    },
+    "_meta": {
+      "title": "Original prepared crop"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "UIAssets_puzzle_memories_pilot_map_badge_mwowlukm_contour.png"
+    },
+    "_meta": {
+      "title": "Contour: opaque object, transparent outside"
+    }
+  },
+  "3": {
+    "class_type": "LoadBackgroundRemovalModel",
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    },
+    "_meta": {
+      "title": "Automatic foreground mask"
+    }
+  },
+  "4": {
+    "class_type": "RemoveBackground",
+    "inputs": {
+      "bg_removal_model": [
+        "3",
+        0
+      ],
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Estimate foreground from original RGB"
+    }
+  },
+  "5": {
+    "class_type": "InvertMask",
+    "inputs": {
+      "mask": [
+        "4",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Convert to Comfy transparency mask"
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "5",
+        0
+      ],
+      "on_true": [
+        "2",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Use traced contour / otherwise automatic"
+    }
+  },
+  "7": {
+    "class_type": "GameArtCutoutFinish",
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "alpha": [
+        "6",
+        0
+      ],
+      "mode": "off",
+      "blackpoint": 0.01,
+      "whitepoint": 0.99,
+      "max_iterations": 1000,
+      "outer_margin": 2,
+      "edge_width": 1,
+      "min_component_fraction": 0
+    },
+    "_meta": {
+      "title": "Refine mask; original RGB retained"
+    }
+  },
+  "8": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "7",
+        0
+      ],
+      "alpha": [
+        "7",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "Original pixels + selected alpha"
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "8",
+        0
+      ],
+      "filename_prefix": "UIAssets/Manual/map_badge/candidate"
+    },
+    "_meta": {
+      "title": "Candidate; requires visual review"
+    }
+  }
+}

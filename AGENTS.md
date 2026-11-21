@@ -22,6 +22,8 @@ Do not claim MCP integration is complete from repository checkout, environment i
 
 Use the bundled `skills/unity-ui-assets/SKILL.md` when applicable. Keep a single active installed copy. It allows an initial attempt plus up to three retries per asset unless the user sets another limit. Keep the best attempt and identify unresolved assets.
 
+With the local toolkit (`Pipelines/UnityUIAssets`), generate UI elements first and extract only fully visible illustration; the edit route in `edit/` is the default. Sort existing sprites and reuse clean older versions before generating, and read the user's review decisions back instead of guessing. Calibrate one asset per class, then submit each pass as a batch. Key the gray background with `key_bg.py` rather than BiRefNet. Keep assets with a long side under 128 px in two sizes: the exact runtime PNG and a high-resolution master. Prefer a deterministic fix over another retry when a defect is systematic. Each attempt goes in a new `runs/` folder, which stays out of Git. Candidates become ready only after the user accepts them.
+
 After every full screen breakdown or full production run, provide `Gallery.html` alongside PNGs. Show the source screen and assembled result, then labeled Before/After columns per asset. Use a labeled reference crop when no prior PNG exists. Show transparency, make full images clickable, and verify local links. For mask comparisons apply both masks to the same generation with the same crop, scale, and background. Include the gallery link in the handoff.
 
 ## Maintenance

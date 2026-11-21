@@ -20,6 +20,18 @@ The two files starting with `05` are distinct workflows. `Input/reference.png` i
 
 For the current game-art entry points and the image-conditioned UI asset graph, see [GAME_ART_PIPELINE.md](../GAME_ART_PIPELINE.md). Original/API graphs and interface-visible user copies have separate roles. Keep user changes when synchronizing them.
 
+## UIAssets workflows
+
+The first three graphs are driven by the [reference-to-sprite toolkit](../Pipelines/UnityUIAssets/README.md), which prepares their inputs and masks; they can also be opened in the browser for inspection. They use the `ui` profile.
+
+| UI JSON under `Workflows/UIAssets/` | Purpose |
+|---|---|
+| `01_Extract_Source.json` | Original RGB plus a traced or estimated alpha mask; no diffusion redraw |
+| `02_Repair_Masked.json` | Reference-conditioned local generation composited back into the original crop; protected source pixels retained |
+| `03_Rebuild_Object.json` | Coherent whole-object generation, followed by cutout and explicit review |
+
+The toolkit's default edit route builds its Qwen Image Edit 2511 API graph per asset with `Pipelines/UnityUIAssets/edit/qwen_edit_graph.py` (crop → edit on flat gray → raw PNG) and keys and colour-matches the result outside ComfyUI. `Workflows/UIAssets/04_Edit_Isolate_API.json` is one such graph with placeholder values, for MCP submission or inspection: set the image, crop and instruction, then key the raw PNG with `edit/key_bg.py`. It needs the `uiassets` or `qwen` profile and has no separate browser layout; `GameArt/GameArt_QwenEdit2511_v1` is the closest interactive graph (same model family, no crop step).
+
 ## Masks and reference images
 
 For inpainting, open Mask Editor from `Load Image`. White marks replacement and black marks preservation. Loading a PNG yields a mask of `1 - alpha`; mask and image dimensions must agree. SD 1.5 examples use dimensions divisible by eight. A specialized inpaint checkpoint can be added for a specific task.

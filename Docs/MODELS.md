@@ -6,12 +6,13 @@ All files were matched to local SHA256 on 2026-11-18. Sizes are decimal GB; inst
 |---|---:|---:|
 | `starter` | 2 | 2.577 |
 | `ui` | 4 | 8.700 |
+| `uiassets` | 7 | 26.708 |
 | `zimage` | 4 | 8.769 |
 | `qwen` | 5 | 30.094 |
 | `3d` | 5 | 9.289 |
 | `all` | 16 | 57.650 |
 
-Profiles overlap and reuse the same local files. `all` is the union, not the sum of profile totals. The default `ui` profile covers Text Final, Style Final, Retouch Final, and UI Asset Extract. Original SD 1.5 Starter workflows require `starter`. Model presence does not verify a workflow or hardware compatibility.
+Profiles overlap and reuse the same local files. `all` is the union, not the sum of profile totals. The default `ui` profile covers Text Final, Style Final, Retouch Final, and UI Asset Extract. `uiassets` adds Qwen Image Edit 2511 with its encoder and VAE for the reference-to-sprite edit route in [Pipelines/UnityUIAssets](../Pipelines/UnityUIAssets/README.md); it skips the 11.6 GB Qwen generation model that only the `qwen` profile needs. Original SD 1.5 Starter workflows require `starter`. Model presence does not verify a workflow or hardware compatibility.
 
 | Local file under Models | GB | Pinned source |
 |---|---:|---|

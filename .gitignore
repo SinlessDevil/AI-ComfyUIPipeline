@@ -33,3 +33,7 @@
 **/venv/
 **/__pycache__/
 *.py[cod]
+
+# Per-run outputs and local backups of the reference-to-sprite toolkit
+/Pipelines/*/runs/
+/Pipelines/*/History/
